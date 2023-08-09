@@ -2,7 +2,7 @@
 class TextGame {
     //생성자
     constructor() {
-        this._textBarController = new TextBarController(this.branchProcess); // test3333
+        this._textBarController = new TextBarController(this.branchProcess);
         this._canvasController = new CanvasController();
         this._soundController = new SoundController();
         this._branchManager = new BranchManager();
