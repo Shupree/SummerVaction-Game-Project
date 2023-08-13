@@ -18,8 +18,8 @@ body{
 
 #canvasDiv{
     z-index: 1;
-    width: 100vw;
-    height: 56.25vw;
+    width: 1280px;
+    height: 720px;
     position: relative;
     background-color: #000;
     overflow: hidden;
@@ -28,7 +28,7 @@ body{
 #leftImgDiv{
     z-index: 2;
     width: 20vw;
-    top: 0vw;
+    top: 0vh;
     left: 5vw;
     position: absolute;
     text-align: center;
@@ -37,7 +37,7 @@ body{
 #centerImgDiv{
     z-index: 2;
     width: 40vw;
-    top: 0vw;
+    top: 0vh;
     left: 30vw;
     position: absolute;
     text-align: center;
@@ -46,15 +46,15 @@ body{
 #rightImgDiv{
     z-index: 2;
     width: 20vw;
-    top: 0vw;
+    top: 0vh;
     right: 5vw;
     position: absolute;
     text-align: center;
 }
 
 #backgroundImg{
-    width: 100vw;
-    height: 56.25vw;
+    width: 1280px;
+    height: 720px;
 }
 
 #centerImg, #leftImg, #rightImg{
@@ -62,10 +62,10 @@ body{
 }
 
 #nameBox{
-    width: 10vw;
-    height: 4vw;
-    top:34.9vw;
-    left: 3vw;
+    width: 128px;
+    height: 28.8px;
+    top: 550.12px;
+    left: 38.4px;
     font-size: 2.5vw;
     text-align: center;
     vertical-align: bottom;
@@ -79,25 +79,25 @@ body{
     border-style: solid;
     border-radius: 2em;
     font-family: 'Do Hyeon', sans-serif;
-    padding-top: 0.8vw;
+    padding-top: 5.4px;
 }
 
 #chatBox{
-    width: 90.5vw;
-    height: 12vw;
-    top: 35.3vw;
+    width: 1158.4px;
+    height: 86px;
+    top: 550px;
 
     position: absolute;
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.274);
     color: #fff;
     font-size: 2vw;
-    padding: 3vw;
+    padding: 21.6px;
     text-shadow: 2px 2px 2px black;
     border-radius: 2em;
     border-color: rgb(255, 224, 233); 
     border-style: solid;
-    margin: 1.5vw;
+    margin: 10.8px;
 }
 
 button{
