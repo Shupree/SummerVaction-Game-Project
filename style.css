@@ -25,29 +25,30 @@ body{
     overflow: hidden;
 }
 
+/*이미지 위치 조정*/
 #leftImgDiv{
     z-index: 2;
-    width: 20vw;
-    top: 0vh;
-    left: 5vw;
+    width: 370px;
+    top: 50px;
+    left: 60px;
     position: absolute;
     text-align: center;
 }
 
 #centerImgDiv{
     z-index: 2;
-    width: 40vw;
-    top: 0vh;
-    left: 30vw;
+    width: 370px;
+    top: 50px;
+    left: 455px;
     position: absolute;
     text-align: center;
 }
 
 #rightImgDiv{
     z-index: 2;
-    width: 20vw;
-    top: 0vh;
-    right: 5vw;
+    width: 370px;
+    top: 50px;
+    right: 60px;
     position: absolute;
     text-align: center;
 }
@@ -57,47 +58,50 @@ body{
     height: 720px;
 }
 
+/*이미지 크기 조정*/
 #centerImg, #leftImg, #rightImg{
-    width: 30vw;
+    width: 370px;
 }
 
 #nameBox{
-    width: 128px;
-    height: 28.8px;
-    top: 550.12px;
-    left: 38.4px;
-    font-size: 2.5vw;
+    width: 200px;
+    height: 36px;
+    top: 530px;
+    left: 74px;
+    font-size: 20px;
     text-align: center;
     vertical-align: bottom;
 
     position: absolute;
     z-index: 4;
-    background-color: rgb(146, 109, 106);
+    background-color: rgb(60, 60, 60);
     color: #fff;
     text-shadow: 2px 2px 2px black;
-    border-color: rgb(255, 224, 233); 
-    border-style: solid;
-    border-radius: 2em;
+    /*border-color: rgb(255, 224, 233); 
+    border-style: solid;*/
+    border-radius: 10px;
     font-family: 'Do Hyeon', sans-serif;
-    padding-top: 5.4px;
+    padding-top: 5px;
 }
 
 #chatBox{
-    width: 1158.4px;
-    height: 86px;
-    top: 550px;
+    width: 1280px;
+    height: 176px;
+    top: 544px;
+    left: 0px;
 
     position: absolute;
     z-index: 3;
-    background-color: rgba(0, 0, 0, 0.274);
+    background-color: gray;
     color: #fff;
-    font-size: 2vw;
-    padding: 21.6px;
+    font-size: 24px;
+    padding-top: 36px;
+    padding-left: 80px;
     text-shadow: 2px 2px 2px black;
-    border-radius: 2em;
-    border-color: rgb(255, 224, 233); 
-    border-style: solid;
-    margin: 10.8px;
+    /*border-radius: 2em;
+    border-color: rgb(255, 224, 233);
+    border-style: solid;*/
+    /*margin: 10.8px;*/
 }
 
 button{
@@ -141,6 +145,6 @@ label:hover{
 }
 
 .endScreen{
-    font-size: 3vw;
+    font-size: 36px;
     text-align: center;
 }

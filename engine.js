@@ -627,7 +627,7 @@ class CanvasController {
         }
         img.src = src;
         img.className = name;
-        img.style.width = "40vw";
+        img.style.width = "370px";
         if(transition === 1){
             
             img.style.transition = '2s';
