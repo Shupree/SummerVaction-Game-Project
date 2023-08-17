@@ -725,6 +725,27 @@ class BranchManager {
 }
 
 class Branch {
+
+    //ModuleTest
+    ModuleTest(Background, PrintName, dialogue) {
+        //데이터 가져오는 코드 넣기
+        this.addEventsAsPage([
+            //CanvasEvent.removeObject(__, imageHideType.Disappear), //이전 이미지 삭제(겹침방지용)
+            CanvasEvent.changeBackGround(Background), //배경 바꾸기
+            //CanvasEvent.addImage(Image),//이미지 설정
+            TextBarEvent.text(PrintName, dialogue),//스크립트 설정
+        ]);
+        return this;
+    }
+
+    Easy_ModuleTest(BackgroundsData_Num, NameData_Num, LogData_Num) {
+        this.ModuleTest(
+            BackgroundsData[BackgroundsData_Num], 
+            NameData[NameData_Num],
+            LogData[LogData_Num]);
+        return this;
+    }
+
     //branchName: String, end: String
     constructor(branchName, end) {
         this._branchName = branchName;
