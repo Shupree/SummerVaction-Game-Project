@@ -531,7 +531,42 @@ class TextBarController {
             this._nameBox.style.visibility = "visible";
             this._nameBox.innerHTML = name;
         }
-        this._chatBox.innerHTML = text + "<br>";
+
+        text = text.split("");
+        console.log(text);
+        console.log(text.length);
+        let content = "";
+        let textIndex = 0;
+
+        /*for(let textIndex = 0; textIndex < text.length; textIndex ++){
+            if(textIndex == 0){
+                this._chatBox.innerHTML = text[textIndex];
+                console.log(textIndex)
+            }
+            else{
+                console.log(textIndex)
+                this._chatBox.innerHTML += text[textIndex];
+            }
+        }*/
+        function typing() {
+            if(textIndex == 0){
+                console.log(textIndex);
+                content = text[textIndex];
+            }
+            else if(textIndex < text.length){
+                console.log(textIndex);
+                content += text[textIndex];
+            }
+            else{
+                console.log("Finish")
+                clearInterval(tyInt);
+                clearInterval(renewalChatBox);
+            }
+            textIndex += 1;
+            console.log(textIndex)
+        }
+        var tyInt = setInterval(() => typing(), 75);
+        var renewalChatBox = setInterval(() => this._chatBox.innerHTML = content + "<br>", 75);
     }
 
     //options: BranchPair[], o: any, return: String
