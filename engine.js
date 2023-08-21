@@ -35,6 +35,10 @@ class TextGame {
         this.nextPage();
     }
 
+    skipText() {
+            this._textBarController._onSkip = true;
+    }
+
     nextPage() {
         if (this._currentBranch.pages.length <= this._currentPageIndex)
             return;
@@ -513,6 +517,9 @@ class TextBarController {
         this._chatBox = null;
         this._nameBox = null;
         this._callback = callback;
+
+        this._onSkip = false;
+        this._textIndex = 0;
     }
 
     //chatBox: HTMLElement, nameBox: HTMLElement
@@ -523,6 +530,8 @@ class TextBarController {
 
     //name: String, text: String
     setText(name, text) { 
+        clearTimeout(tyInt);
+
         //const chatBox = document.getElementById("chatBox");
         if(name == null) {
             this._nameBox.style.visibility = "hidden";
@@ -532,41 +541,32 @@ class TextBarController {
             this._nameBox.innerHTML = name;
         }
 
-        text = text.split("");
-        console.log(text);
-        console.log(text.length);
-        let content = "";
-        let textIndex = 0;
+        let textList = text.split("")
+        
+        if(this._onSkip == true) {
+            this._onSkip = false;
+            clearTimeout(tyInt);
 
-        /*for(let textIndex = 0; textIndex < text.length; textIndex ++){
-            if(textIndex == 0){
-                this._chatBox.innerHTML = text[textIndex];
-                console.log(textIndex)
-            }
-            else{
-                console.log(textIndex)
-                this._chatBox.innerHTML += text[textIndex];
-            }
-        }*/
-        function typing() {
-            if(textIndex == 0){
-                console.log(textIndex);
-                content = text[textIndex];
-            }
-            else if(textIndex < text.length){
-                console.log(textIndex);
-                content += text[textIndex];
-            }
-            else{
-                console.log("Finish")
-                clearInterval(tyInt);
-                clearInterval(renewalChatBox);
-            }
-            textIndex += 1;
-            console.log(textIndex)
+            this._chatBox.innerHTML = text + "<br>";
+            this._textIndex = 0;
         }
-        var tyInt = setInterval(() => typing(), 75);
-        var renewalChatBox = setInterval(() => this._chatBox.innerHTML = content + "<br>", 75);
+        else{
+            if(this._textIndex == 0){
+                this._chatBox.innerHTML = textList[this._textIndex];
+                var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
+                this._textIndex += 1;
+            }
+            else if(this._textIndex < text.length){
+                this._chatBox.innerHTML += textList[this._textIndex];
+                var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
+                this._textIndex += 1; 
+            }
+            else{
+                clearTimeout(tyInt);
+                this._chatBox.innerHTML = text + "<br>";
+                this._textIndex = 0;
+            }
+        }
     }
 
     //options: BranchPair[], o: any, return: String
