@@ -63,6 +63,19 @@ body{
     width: 370px;
 }
 
+#inventoryImgDiv{
+    z-index: 3;
+    width: 50px;
+    top: 25px;
+    right: 25px;
+    position: absolute;
+    text-align: center;
+}
+
+#inventoryImg{
+    width: 50px
+}
+
 #nameBox{
     width: 200px;
     height: 36px;

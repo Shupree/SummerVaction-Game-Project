@@ -21,6 +21,15 @@ class TextGame {
         this._branchManager.addBranch(branch);
     }
 
+    /*searchOptions(option) {
+        for (var i = 0; i < Options.length; i++) {
+            if (option == Options[i]) {
+                return true
+            }
+        }
+        return false
+    }*/
+
     setTextBarElement(chatBox, nameBox) {
         this._textBarController.init(chatBox, nameBox);
     }
@@ -760,6 +769,13 @@ class BranchManager {
 }
 
 class Branch {
+    //branchName: String, end: String
+    constructor(branchName, end) {
+        this._branchName = branchName;
+        this._end = end;
+        //pages: Page[]
+        this._pages = [];
+    }
 
     //ModuleTest
     ModuleTest(Background, PrintName, dialogue) {
@@ -779,14 +795,6 @@ class Branch {
             NameData[NameData_Num],
             LogData[LogData_Num]);
         return this;
-    }
-
-    //branchName: String, end: String
-    constructor(branchName, end) {
-        this._branchName = branchName;
-        this._end = end;
-        //pages: Page[]
-        this._pages = [];
     }
 
     //page: Page, return: Branch

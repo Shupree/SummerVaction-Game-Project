@@ -10,12 +10,13 @@ const branch_1 = new Branch("branch_1", null)
       modelPosition.center,
       imageShowType.FadeIn
     ),
+    DelayEvent.delay(3000),
     TextBarEvent.text(
       "히로인",
       "임시 구성된 화면입니다."
     ),
   ])
-  .addTextPage("히로인","대사 출력 테스트입니다.")
+  .addTextPage("히로인","대사 출력 테스트입니다!")
   .addEventsAsPage([
     TextBarEvent.branch([
       new BranchPair("선택지 1", "branch_1_1"),
@@ -53,10 +54,10 @@ const branch_1_1 = new Branch("branch_1_1", "branch_2")   // 분기점 1
   .addEventsAsPage([
     TextBarEvent.text("주인공", "그리고 다시 정신을 잃었다.")
   ])
+
 textGame.addBranch(branch_1_1);
 
 const branch_1_2 = new Branch("branch_1_2", "branch_2")   // 분기점 2
-
   .addEventsAsPage([CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드.png")])
   .addTextPage("주인공", "나는 (히로인)이/가 좋아!")
   .addEventsAsPage([
@@ -79,3 +80,6 @@ const branch_2 = new Branch("branch_2", "branch_3")
   ])
 
 textGame.addBranch(branch_2);
+
+
+console.log(Options);
