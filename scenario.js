@@ -1,49 +1,50 @@
 const textGame = new TextGame();
 
-const branch_1 = new Branch("branch_1", null)   // 시나리오 불러오기
+const branch_1 = new Branch("branch_1", null)
   .addEventsAsPage([
-    CanvasEvent.changeBackGround("이미지 url"), // 배경 이미지 변경(url)
-    DelayEvent.delay(0),  // 딜레이(int)
-    SoundEvent.sfx("사운드 url"),  // 효과음 사운드(url)
-    TextBarEvent.text(
-      "캐릭터 이름",  // 캐릭터 이름
-      "대사"  // 대사(text)
-    ),
-    SoundEvent.background(""),  // 배경 음악(url)
-    SoundEvent.stopbackground(),   // 배경 음악 제거
-
-    CanvasEvent.addImage(   // 이미지 추가
-      "이미지 이름", // 이미지 이름
-      "이미지 url", // 이미지 url
-      modelPosition.center, // 이미지 위치 조정
+    CanvasEvent.changeBackGround("images/backgrounds/도서관/도서관.png"),
+    DelayEvent.delay(2500),
+    CanvasEvent.addImage(
+      "히로인_인간",
+      "images/charactors/히로인_인간_01.png",
+      modelPosition.center,
       imageShowType.FadeIn
     ),
-    CanvasEvent.removeObject("이미지 이름", imageHideType.Disappear), // 이미지 제거
-    TextBarEvent.branch([   // 분기점 생성
+    DelayEvent.delay(3000),
+    TextBarEvent.text(
+      "히로인",
+      "임시 구성된 화면입니다."
+    ),
+  ])
+  .addTextPage("히로인","대사 출력 테스트입니다!")
+  .addEventsAsPage([
+    TextBarEvent.branch([
       new BranchPair("선택지 1", "branch_1_1"),
       new BranchPair("선택지 2", "branch_1_2")
-    ])
+    ]),
   ])
 
-  .addTextPage(
-    null,  // 캐릭터 이름
-    "Bye, World!"  // 대사(text)
-  )
-
-textGame.addBranch(branch_1);   // 실행
+textGame.addBranch(branch_1);
 
 const branch_1_1 = new Branch("branch_1_1", "branch_2")   // 분기점 1
-  //.addTextPage("주인공", "그리고 나는 정신을 잃었다.")
+  // Test_Module
+  .addEventsAsPage([CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear)])
+  //이미지 삭제/딜레이 -> 별도 코드, 모듈은 배경/대사/이미지추가만
+  //.ModuleTest(BackgroundsData[0], NameData.주인공, LogData[1]) //ImageData[0])
+  //.ModuleTest(BackgroundsData[1], NameData.알수없음, LogData[2]) //ImageData[0])
+  .Easy_ModuleTest(0, "주인공", 1)
+  .Easy_ModuleTest(1, "이연우", 2)
+
   .addEventsAsPage([
-    CanvasEvent.changeBackGround("https://marketplace.canva.com/EAD2xI0GoM0/1/0/1600w/canva-%ED%95%98%EB%8A%98-%EC%95%BC%EC%99%B8-%EC%9E%90%EC%97%B0-%EC%98%81%EA%B0%90-%EC%9D%B8%EC%9A%A9%EB%AC%B8-%EB%8D%B0%EC%8A%A4%ED%81%AC%ED%86%B1-%EB%B0%B0%EA%B2%BD%ED%99%94%EB%A9%B4-rssvAb9JL4I.jpg")
+    CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear),
+    CanvasEvent.changeBackGround("images/backgrounds/강당/강당.png")
   ])
   .addEventsAsPage([
     DelayEvent.delay(1000),
-    CanvasEvent.addImage("히로인", "https://cdn.imweb.me/upload/S202010013208049566f15/0d0db0f9ef891.gif",
+    CanvasEvent.addImage("히로인", "images/charactors/히로인_인간_01.png",
     modelPosition.center,
     imageShowType.FadeIn),
     TextBarEvent.text("히로인", "저런,. 친구들이 다 죽었지만 괜찮아!")
-    
   ])
   .addTextPage("히로인", "힘내, 주인공 군!")
   .addEventsAsPage([
@@ -53,11 +54,11 @@ const branch_1_1 = new Branch("branch_1_1", "branch_2")   // 분기점 1
   .addEventsAsPage([
     TextBarEvent.text("주인공", "그리고 다시 정신을 잃었다.")
   ])
+
 textGame.addBranch(branch_1_1);
 
 const branch_1_2 = new Branch("branch_1_2", "branch_2")   // 분기점 2
-
-  .addEventsAsPage([CanvasEvent.changeBackGround("C:\Users\eunje\Desktop\자료실블러 1.jpg")])
+  .addEventsAsPage([CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드.png")])
   .addTextPage("주인공", "나는 (히로인)이/가 좋아!")
   .addEventsAsPage([
     TextBarEvent.text("히로인", "나도 (주인공)이/가 정말 좋아!"),
@@ -72,10 +73,13 @@ const branch_1_2 = new Branch("branch_1_2", "branch_2")   // 분기점 2
 textGame.addBranch(branch_1_2);
 
 const branch_2 = new Branch("branch_2", "branch_3")
-  .addTextPage("캐릭터 이름", "대사")
   .addEventsAsPage([
-    CanvasEvent.changeBackGround("https://blog.kakaocdn.net/dn/bqPYzR/btraWSj02cT/HnIasx6vc09IszobY6Fwe0/img.jpg"),
+    CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear),
+    CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드블러.png"),
     TextBarEvent.text("캐릭터 이름", "대사"),
   ])
 
 textGame.addBranch(branch_2);
+
+
+console.log(Options);

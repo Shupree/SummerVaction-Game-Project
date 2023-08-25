@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <link rel= "stylesheet" type="text/css" href="style.css">
-    <title>.</title>
+    <title>인게임</title>
+    <script src="Test_Prologue.js"></script>
     <script src="engine.js"></script>
     <script src="scenario.js"></script>
 </head>
-<body onClick="textGame.nextPage()" id="body">
-    <div id="canvasDiv">
+<body id="body">
+    <div id="canvasDiv" onclick="checkPressed(this)">
         <img id="backgroundImg" src="">
         <div id="leftImgDiv" class="ImgDiv"><img id="leftImg" src="" class="img"></div>
         <div id="centerImgDiv" class="ImgDiv"><img id="centerImg" src="" class="img"></div>
@@ -20,8 +21,12 @@
         <div id="textbar">
             <div id="nameBox"></div>
             <div id="chatBox" class="typewriter"></div>
-        <div>
+        </div>
+        <div id="inventory">
+            <div id="inventoryImgDiv" onclick="checkPressed(this)"><img id="inventoryImg" src="images/UI/Bag.png" class="img"></div>
+        </div>
     </div>
     <script src="start.js"></script>
+    <script type = "text/javascript" src="userInteraction.js"></script>
 </body>
 </html>

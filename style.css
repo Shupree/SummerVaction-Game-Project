@@ -18,86 +18,103 @@ body{
 
 #canvasDiv{
     z-index: 1;
-    width: 100vw;
-    height: 56.25vw;
+    width: 1280px;
+    height: 720px;
     position: relative;
     background-color: #000;
     overflow: hidden;
 }
 
+/*이미지 위치 조정*/
 #leftImgDiv{
     z-index: 2;
-    width: 20vw;
-    top: 0vw;
-    left: 5vw;
+    width: 370px;
+    top: 50px;
+    left: 60px;
     position: absolute;
     text-align: center;
 }
 
 #centerImgDiv{
     z-index: 2;
-    width: 40vw;
-    top: 0vw;
-    left: 30vw;
+    width: 370px;
+    top: 50px;
+    left: 455px;
     position: absolute;
     text-align: center;
 }
 
 #rightImgDiv{
     z-index: 2;
-    width: 20vw;
-    top: 0vw;
-    right: 5vw;
+    width: 370px;
+    top: 50px;
+    right: 60px;
     position: absolute;
     text-align: center;
 }
 
 #backgroundImg{
-    width: 100vw;
-    height: 56.25vw;
+    width: 1280px;
+    height: 720px;
 }
 
+/*이미지 크기 조정*/
 #centerImg, #leftImg, #rightImg{
-    width: 30vw;
+    width: 370px;
+}
+
+#inventoryImgDiv{
+    z-index: 3;
+    width: 50px;
+    top: 25px;
+    right: 25px;
+    position: absolute;
+    text-align: center;
+}
+
+#inventoryImg{
+    width: 50px
 }
 
 #nameBox{
-    width: 10vw;
-    height: 4vw;
-    top:34.9vw;
-    left: 3vw;
-    font-size: 2.5vw;
+    width: 200px;
+    height: 36px;
+    top: 530px;
+    left: 74px;
+    font-size: 20px;
     text-align: center;
     vertical-align: bottom;
 
     position: absolute;
     z-index: 4;
-    background-color: rgb(146, 109, 106);
+    background-color: rgb(60, 60, 60);
     color: #fff;
     text-shadow: 2px 2px 2px black;
-    border-color: rgb(255, 224, 233); 
-    border-style: solid;
-    border-radius: 2em;
+    /*border-color: rgb(255, 224, 233); 
+    border-style: solid;*/
+    border-radius: 10px;
     font-family: 'Do Hyeon', sans-serif;
-    padding-top: 0.8vw;
+    padding-top: 5px;
 }
 
 #chatBox{
-    width: 90.5vw;
-    height: 12vw;
-    top: 35.3vw;
+    width: 1280px;
+    height: 176px;
+    top: 544px;
+    left: 0px;
 
     position: absolute;
     z-index: 3;
-    background-color: rgba(0, 0, 0, 0.274);
+    background-color: gray;
     color: #fff;
-    font-size: 2vw;
-    padding: 3vw;
+    font-size: 24px;
+    padding-top: 36px;
+    padding-left: 80px;
     text-shadow: 2px 2px 2px black;
-    border-radius: 2em;
-    border-color: rgb(255, 224, 233); 
-    border-style: solid;
-    margin: 1.5vw;
+    /*border-radius: 2em;
+    border-color: rgb(255, 224, 233);
+    border-style: solid;*/
+    /*margin: 10.8px;*/
 }
 
 button{
@@ -141,6 +158,6 @@ label:hover{
 }
 
 .endScreen{
-    font-size: 3vw;
+    font-size: 36px;
     text-align: center;
 }

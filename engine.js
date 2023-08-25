@@ -21,6 +21,15 @@ class TextGame {
         this._branchManager.addBranch(branch);
     }
 
+    /*searchOptions(option) {
+        for (var i = 0; i < Options.length; i++) {
+            if (option == Options[i]) {
+                return true
+            }
+        }
+        return false
+    }*/
+
     setTextBarElement(chatBox, nameBox) {
         this._textBarController.init(chatBox, nameBox);
     }
@@ -33,6 +42,10 @@ class TextGame {
     start(entryBranch) {
         this._currentBranch = entryBranch;
         this.nextPage();
+    }
+
+    skipText() {
+            this._textBarController._onSkip = true;
     }
 
     nextPage() {
@@ -513,6 +526,9 @@ class TextBarController {
         this._chatBox = null;
         this._nameBox = null;
         this._callback = callback;
+
+        this._onSkip = false;
+        this._textIndex = 0;
     }
 
     //chatBox: HTMLElement, nameBox: HTMLElement
@@ -523,6 +539,8 @@ class TextBarController {
 
     //name: String, text: String
     setText(name, text) { 
+        clearTimeout(tyInt);
+
         //const chatBox = document.getElementById("chatBox");
         if(name == null) {
             this._nameBox.style.visibility = "hidden";
@@ -531,7 +549,33 @@ class TextBarController {
             this._nameBox.style.visibility = "visible";
             this._nameBox.innerHTML = name;
         }
-        this._chatBox.innerHTML = text + "<br>";
+
+        let textList = text.split("")
+        
+        if(this._onSkip == true) {
+            this._onSkip = false;
+            clearTimeout(tyInt);
+
+            this._chatBox.innerHTML = text + "<br>";
+            this._textIndex = 0;
+        }
+        else{
+            if(this._textIndex == 0){
+                this._chatBox.innerHTML = textList[this._textIndex];
+                var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
+                this._textIndex += 1;
+            }
+            else if(this._textIndex < text.length){
+                this._chatBox.innerHTML += textList[this._textIndex];
+                var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
+                this._textIndex += 1; 
+            }
+            else{
+                clearTimeout(tyInt);
+                this._chatBox.innerHTML = text + "<br>";
+                this._textIndex = 0;
+            }
+        }
     }
 
     //options: BranchPair[], o: any, return: String
@@ -627,7 +671,7 @@ class CanvasController {
         }
         img.src = src;
         img.className = name;
-        img.style.width = "40vw";
+        img.style.width = "370px";
         if(transition === 1){
             
             img.style.transition = '2s';
@@ -731,6 +775,26 @@ class Branch {
         this._end = end;
         //pages: Page[]
         this._pages = [];
+    }
+
+    //ModuleTest
+    ModuleTest(Background, PrintName, dialogue) {
+        //데이터 가져오는 코드 넣기
+        this.addEventsAsPage([
+            //CanvasEvent.removeObject(__, imageHideType.Disappear), //이전 이미지 삭제(겹침방지용)
+            CanvasEvent.changeBackGround(Background), //배경 바꾸기
+            //CanvasEvent.addImage(Image),//이미지 설정
+            TextBarEvent.text(PrintName, dialogue),//스크립트 설정
+        ]);
+        return this;
+    }
+
+    Easy_ModuleTest(BackgroundsData_Num, NameData_Num, LogData_Num) {
+        this.ModuleTest(
+            BackgroundsData[BackgroundsData_Num], 
+            NameData[NameData_Num],
+            LogData[LogData_Num]);
+        return this;
     }
 
     //page: Page, return: Branch
