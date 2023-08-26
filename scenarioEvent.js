@@ -3,58 +3,65 @@
 
 const textGame = new TextGame();
 
-const branch_1 = new Branch("branch_1", null)   // 시나리오 불러오기
+const branch_1 = new Branch("시작 브랜치 이름", "다음 브랜치 이름", "생성할 조건 변수 이름")   // 시나리오 불러오기(str, str, str)
+                //다음 브랜치가 분기점에 의해 나눠지는 경우, 다음 브랜치 이름을 'null'로 표기
+                //해당 브랜치가 조건 변수를 생성하지 않는 경우, 조건 변수 이름을 'null'로 표기
   .addEventsAsPage([
-    CanvasEvent.changeBackGround("이미지 url"), // 배경 이미지 변경(url)
-    DelayEvent.delay(0),  // 딜레이(int)
-    SoundEvent.sfx("사운드 url"),  // 효과음 사운드(url)
+    CanvasEvent.changeBackGround("이미지 url"),   //배경 이미지 변경(url)
+    DelayEvent.delay(0),    //딜레이(int)
+    SoundEvent.sfx("사운드 url"),   //효과음 사운드(url)
     TextBarEvent.text(
-      "캐릭터 이름",  // 캐릭터 이름
-      "대사"  // 대사(text)
+      "캐릭터 이름",    //캐릭터 이름
+      "대사"    //대사(text)
     ),
-    SoundEvent.background(""),  // 배경 음악(url)
-    SoundEvent.stopbackground(),   // 배경 음악 제거
+    SoundEvent.background(""),      //배경 음악(url)
+    SoundEvent.stopbackground(),    //배경 음악 제거
 
-    CanvasEvent.addImage(   // 이미지 추가
-      "이미지 이름", // 이미지 이름
-      "이미지 url", // 이미지 url
-      modelPosition.center, // 이미지 위치 조정
+    CanvasEvent.addImage(     //이미지 추가
+      "이미지 이름",    //이미지 이름
+      "이미지 url",     //이미지 url
+      modelPosition.center,    //이미지 위치 조정
       imageShowType.FadeIn
     ),
-    CanvasEvent.removeObject("이미지 이름", imageHideType.Disappear), // 이미지 제거
+    CanvasEvent.removeObject("이미지 이름", imageHideType.Disappear),   //이미지 제거
     TextBarEvent.branch([   // 분기점 생성
-      new BranchPair("선택지 1", "branch_1_1"),
-      new BranchPair("선택지 2", "branch_1_2")
+      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 변수 이름"),   //분기점 생성(str, str, str)
+      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 변수 이름")
+      //조건 변수에 의해 자동으로 진행되는 것을 원할 경우, 분기점 대사를 'null'로 표기
+      //Ex) new BranchPair(null, "Branch_2_1", "A1")
+      
+      //조건 변수가 필요없는 경우, 조건 변수 이름을 'null'로 표기
+      //Ex) new BranchPair("나이프로 찌른다.", "Branch_2_1", null)
     ])
   ])
 
   .addTextPage(
-    null,  // 캐릭터 이름
-    "Bye, World!"  // 대사(text)
+    null,  //캐릭터 이름
+    "Bye, World!"  //대사(text)
   )
 
-textGame.addBranch(branch_1);   // 실행
+textGame.addBranch(branch_1);   //실행
 
-const branch_1_1 = new Branch("branch_1_1", "branch_2")   // 분기점 1
+const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   //분기점 1
   .addEventsAsPage([
     TextBarEvent.text(
-      "캐릭터 이름",  // 캐릭터 이름
-      "대사"  // 대사(text)
+      "캐릭터 이름",  //캐릭터 이름
+      "대사"  //대사(text)
     ),
-    CanvasEvent.showEnding(   // 엔딩 (기본으로 제작된 엔딩 구성입니다. 추후 엔딩 연출에 따라 이용되지 않을 수도 있습니다.)
+    CanvasEvent.showEnding(   //엔딩 (기본으로 제작된 엔딩 구성입니다. 추후 엔딩 연출에 따라 이용되지 않을 수도 있습니다.)
       "엔딩 멘트"
     )
   ])
 
 textGame.addBranch(branch_1_1);
 
-const branch_1_2 = new Branch("branch_1_2", "branch_2")   // 분기점 2
+const branch_1_2 = new Branch("branch_1_2", "branch_2", "A2")   //분기점 2
   .addEventsAsPage([
     TextBarEvent.text(
-      "캐릭터 이름",  // 캐릭터 이름
+      "캐릭터 이름",  //캐릭터 이름
       "대사"  // 대사(text)
     ),
-    CanvasEvent.showEnding(   // 엔딩 (기본으로 제작된 엔딩 구성입니다. 추후 엔딩 연출에 따라 이용되지 않을 수도 있습니다.)
+    CanvasEvent.showEnding(   //엔딩 (기본으로 제작된 엔딩 구성입니다. 추후 엔딩 연출에 따라 이용되지 않을 수도 있습니다.)
       "엔딩 멘트"
     )
   ])

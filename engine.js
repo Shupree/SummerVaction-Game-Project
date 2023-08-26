@@ -5,6 +5,7 @@ class TextGame {
         this._textBarController = new TextBarController(this.branchProcess);
         this._canvasController = new CanvasController();
         this._soundController = new SoundController();
+        this._optionController = new OptionController();
         this._branchManager = new BranchManager();
         this._currentBranch = new Branch("Root", "END");
         this._currentPageIndex = 0;
@@ -20,15 +21,6 @@ class TextGame {
     addBranch(branch) {
         this._branchManager.addBranch(branch);
     }
-
-    /*searchOptions(option) {
-        for (var i = 0; i < Options.length; i++) {
-            if (option == Options[i]) {
-                return true
-            }
-        }
-        return false
-    }*/
 
     setTextBarElement(chatBox, nameBox) {
         this._textBarController.init(chatBox, nameBox);
@@ -98,7 +90,13 @@ class TextGame {
                 this._currentPageIndex = -1;
             }
         }
-        this._currentPageIndex += 1;   
+
+        if (this._currentBranch._option != null) {
+            this._optionController.addOption(this._currentBranch._option);
+            this._currentBranch._option = null;
+        }
+
+        this._currentPageIndex += 1;
     }
 
     //baseEvent: BaseEvent[]
@@ -265,7 +263,8 @@ const EventType = {
 //TextbarEventType: Number
 const TextbarEventType = {
 	Text: 0,
-	Branch: 1
+	Branch: 1,
+    AutoBranch: 2
 }
 
 //CanvasEventType: Number
@@ -363,10 +362,11 @@ class TextPair {
 }
 
 class BranchPair {
-    //name: String, branch: Branch
-    constructor(name, branch) {
+    //name: String, branch: Branch, condition: Option(String)
+    constructor(name, branch, condition) {
         this._name = name;
         this._branch = branch;
+        this._condition = condition;
     }   
 
     //return: String
@@ -374,6 +374,9 @@ class BranchPair {
     
     //return: Branch
     get branch() { return this._branch; }
+
+    //return: Option(String)
+    get condition() { return this._condition}
 }
 
 class CanvasEvent extends BaseEvent {
@@ -580,31 +583,57 @@ class TextBarController {
 
     //options: BranchPair[], o: any, return: String
     showBranch(options, o) { 
-        let button = [];
-        let label = [];
-        let text = [];
+        var isAuto = true;
         for(let i = 0; i < options.length; i++){
-            label[i] = document.createElement('label');
-            button[i] = document.createElement('button');
-            text[i] = document.createElement('span');
-            this._chatBox.appendChild(label[i]);
-            label[i].appendChild(button[i]);
-            label[i].appendChild(text[i]);
-            label[i].appendChild(document.createElement('br'));
-            text[i].innerHTML = "→" + options[i].name;
-
-            eventlistener(i).then((resolvedData) => {
-                this._callback(resolvedData, o);
-            });
+            if (options[i]._name != null) {
+                isAuto = false;
+            }
         }
-        const tmpThis = this;
-        function eventlistener(i) {
-            return new Promise(function(resolve, reject) {
-                button[i].addEventListener('click', function(event) {
-                    resolve(options[i]);
-                    tmpThis.clearTextBar();
-                }, false);
-            })
+        //이전 선택지의 선택에 따른 자동 선택
+        if (isAuto == true) {
+            for(let i = 0; i < options.length; i++){
+                eventlistener(i).then((resolvedData) => {
+                    this._callback(resolvedData, o);
+                });
+            }
+            const tmpThis = this;
+            function eventlistener(i) {
+                return new Promise(function(resolve, reject) {
+                    if (textGame._optionController.checkingOption(options[i]._condition)) {
+                        resolve(options[i]);
+                        tmpThis.clearTextBar();
+                    }
+                })
+            }
+        }
+        //플레이어에 의한 수동 선택
+        else {
+            let button = [];
+            let label = [];
+            let text = [];
+            for(let i = 0; i < options.length; i++){
+                label[i] = document.createElement('label');
+                button[i] = document.createElement('button');
+                text[i] = document.createElement('span');
+                this._chatBox.appendChild(label[i]);
+                label[i].appendChild(button[i]);
+                label[i].appendChild(text[i]);
+                label[i].appendChild(document.createElement('br'));
+                text[i].innerHTML = "→" + options[i].name;
+
+                eventlistener(i).then((resolvedData) => {
+                    this._callback(resolvedData, o);
+                });
+            }
+            const tmpThis = this;
+            function eventlistener(i) {
+                return new Promise(function(resolve, reject) {
+                    button[i].addEventListener('click', function(event) {
+                        resolve(options[i]);
+                        tmpThis.clearTextBar();
+                    }, false);
+                })
+            }
         }
     }
 
@@ -769,10 +798,11 @@ class BranchManager {
 }
 
 class Branch {
-    //branchName: String, end: String
-    constructor(branchName, end) {
+    //branchName: String, end: String, option: String
+    constructor(branchName, end, option) {
         this._branchName = branchName;
         this._end = end;
+        this._option = option;
         //pages: Page[]
         this._pages = [];
     }
@@ -867,5 +897,24 @@ class SoundController {
     playSound(src) {
         this._activeSound.src = src;
         this._activeSound.play();
+    }
+}
+
+class OptionController {
+    constructor() {
+        this._options = [];
+    }
+
+    addOption(option) {
+        this._options.push(option);
+    }
+
+    checkingOption(option) {
+        for (var i = 0; i < this._options.length; i++) {
+            if (option == this._options[i]) {
+                return true;
+            }
+        }
+        return false;
     }
 }
