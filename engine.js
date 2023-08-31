@@ -96,7 +96,7 @@ class TextGame {
             this._currentBranch._option = null;
         }
 
-        this._currentPageIndex += 1;
+        this._currentPageIndex += 1;   
     }
 
     //baseEvent: BaseEvent[]
@@ -554,7 +554,7 @@ class TextBarController {
         }
 
         let textList = text.split("")
-        
+
         if(this._onSkip == true) {
             this._onSkip = false;
             clearTimeout(tyInt);
@@ -737,6 +737,7 @@ class CanvasController {
         }
     }
 
+    //배경 속도조절
     //src: String
     setBackground(src) {
         this._canvasImg.style.opacity = "0";
@@ -797,6 +798,10 @@ class BranchManager {
     }
 }
 
+// const parsedData = JSON.parse(DATA_01)
+// class Module_Image {
+//     if(parsedData === null) {};
+// };
 class Branch {
     //branchName: String, end: String, option: String
     constructor(branchName, end, option) {
@@ -807,14 +812,29 @@ class Branch {
         this._pages = [];
     }
 
-    //ModuleTest
-    ModuleTest(Background, PrintName, dialogue) {
-        //데이터 가져오는 코드 넣기
+    ModuleTest(NOW_Num) {
+        const NOW = DATA_01[NOW_Num];
+        //환경변화 x, 일러스트 X 일 경우 이벤트 취소하도록 별도 기능 필요
         this.addEventsAsPage([
-            //CanvasEvent.removeObject(__, imageHideType.Disappear), //이전 이미지 삭제(겹침방지용)
-            CanvasEvent.changeBackGround(Background), //배경 바꾸기
-            //CanvasEvent.addImage(Image),//이미지 설정
-            TextBarEvent.text(PrintName, dialogue),//스크립트 설정
+            DelayEvent.delay(100),
+            SoundEvent.sfx("sounds/효과음/효과음/딸깍.mp3"),
+            CanvasEvent.changeBackGround(BackgroundsData[NOW.background]),
+            TextBarEvent.text(NOW.teller, NOW.script),
+            CanvasEvent.addImage(
+                NOW.왼그림,
+                ImageData[NOW.왼그림],
+                modelPosition.left,
+                imageShowType.FadeIn),
+            CanvasEvent.addImage(
+                NOW.중앙그림,
+                ImageData[NOW.중앙그림],
+                modelPosition.center,
+                imageShowType.FadeIn),
+            CanvasEvent.addImage(
+                NOW.우그림,
+                ImageData[NOW.우그림],
+                modelPosition.right,
+                imageShowType.FadeIn),     
         ]);
         return this;
     }
@@ -822,8 +842,7 @@ class Branch {
     Easy_ModuleTest(BackgroundsData_Num, NameData_Num, LogData_Num) {
         this.ModuleTest(
             BackgroundsData[BackgroundsData_Num], 
-            NameData[NameData_Num],
-            LogData[LogData_Num]);
+            ImageData[LogData_Num]);
         return this;
     }
 
