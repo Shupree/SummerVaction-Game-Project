@@ -28,7 +28,9 @@ textGame.addBranch(branch_1);
 
 const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   // 분기점 1
   // Test_Module
-  
+  .addEventsAsPage([
+    CanvasEvent.removeObject("히로인_인간", "images/charactors/히로인_인간_01.png")
+  ])
   .ModuleTest(0)
   .ModuleTest(1)
   // .addEventsAsPage([CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear)])

@@ -388,11 +388,37 @@ class CanvasEvent extends BaseEvent {
     }
 
     //return: CanvasEvent
+    // static addImage(name, src, position, transition) { 
+    //     return new CanvasEvent(
+    //         CanvasEventType.AddImage, 
+    //         new ImagePair(name, src, position, transition)
+    //     );
+        
+    // }
+
     static addImage(name, src, position, transition) { 
-        return new CanvasEvent(
-            CanvasEventType.AddImage, 
-            new ImagePair(name, src, position, transition)
-        );
+        let eventType;
+    
+        if (ImagePair.name === null) {
+            eventType = CanvasEventType.RemoveObject;
+            return new CanvasEvent(
+                eventType,
+                CanvasEventType.RemoveObject(imageHideType.Disappear)
+            );
+        } 
+        else {
+            eventType = CanvasEventType.AddImage;
+            return new CanvasEvent(
+                eventType, 
+                new ImagePair(name, src, position, transition)
+            );
+        };
+        return;
+        // return new CanvasEvent(
+        //     eventType, 
+        //     new ImagePair(name, src, position, transition)
+        // );
+        
     }
 
     //return: CanvasEvent
@@ -800,7 +826,107 @@ class BranchManager {
 
 // const parsedData = JSON.parse(DATA_01)
 // class Module_Image {
-//     if(parsedData === null) {};
+//     if(parsedData === null) {
+class Module_Checker {
+    // ImageCheck() {
+    //     for (const item of NOW.그림) {
+    //         const imageProps = [0, 1, 2];
+    //         for (const prop of imageProps) {
+    //             if (item[prop] !== null) {
+    //                 if (prop == 0) {
+    //                     CanvasEvent.addImage(
+    //                         NOW.그림[prop],
+    //                         ImageData[NOW.그림[prop]],
+    //                         modelPosition.left,
+    //                         imageShowType.FadeIn);
+    //                 }
+    //                 else if (prop == 1) {
+    //                     CanvasEvent.addImage(
+    //                         NOW.그림[prop],
+    //                         ImageData[NOW.그림[prop]],
+    //                         modelPosition.center,
+    //                         imageShowType.FadeIn);
+    //                 }
+    //                 else if (prop == 2) {
+    //                     CanvasEvent.addImage(
+    //                         NOW.그림[prop],
+    //                         ImageData[NOW.그림[prop]],
+    //                         modelPosition.right,
+    //                         imageShowType.FadeIn);
+    //                 }
+                    
+    //                 else {
+    //                     console.log("정지")
+    //                     break;
+    //                 }
+    //             } 
+    //             else {
+    //                 CanvasEvent.removeObject(NOW.그림[prop], imageHideType.Disappear);
+    //             }
+    //         }
+    //     }
+    // }
+   
+}
+
+// function ImageCheck (
+//     for (const item of NOW.그림) {
+//         const imageProps = ['left', 'center', 'right'];
+//         const 첫번째그림 = DATA_01[0].그림[0];
+//         //NOW = DATA_01[현재번호].
+//         //NOW.그림[left.center.right] 순차적으로?
+        
+//         for (const item of NOW.그림) {
+//             if (item[prop] !== null) {
+//                 if (prop == 0) {
+//                     CanvasEvent.addImage(
+//                         NOW.그림[prop],
+//                         ImageData[NOW.그림[prop]],
+//                         modelPosition.left,
+//                         imageShowType.FadeIn);
+//                 }
+//                 else if (prop == 1) {
+//                     CanvasEvent.addImage(
+//                         NOW.그림[prop],
+//                         ImageData[NOW.그림[prop]],
+//                         modelPosition.center,
+//                         imageShowType.FadeIn);
+//                 }
+//                 else if (prop == 2) {
+//                     CanvasEvent.addImage(
+//                         NOW.그림[prop],
+//                         ImageData[NOW.그림[prop]],
+//                         modelPosition.right,
+//                         imageShowType.FadeIn);
+//                 }
+//                 else {
+//                     console.log("오류")
+//                 }
+//             } 
+//             else {
+//                 CanvasEvent.removeObject(NOW.그림[prop], imageHideType.Disappear);
+//             }
+//         }
+//     }
+// )
+    // function ImageCheck() {
+    //     const L= NOW.왼그림
+    //     const M = NOW.중앙그림
+    //     const R = NOW.우그림
+    //     if (L === null) {
+    //         CanvasEvent.removeObject(NOW.왼그림, imageHideType.Disappear)
+    //         return this;
+    //     }
+    //     if (M === null) {
+    //         CanvasEvent.removeObject(NOW.중앙그림, imageHideType.Disappear)
+    //         return this;
+    //     }
+    //     if (R === null) {
+    //         CanvasEvent.removeObject(NOW.우그림, imageHideType.Disappear)
+    //         return this;
+    //     }
+    //     return m.length;
+    //   }
 // };
 class Branch {
     //branchName: String, end: String, option: String
@@ -811,6 +937,49 @@ class Branch {
         //pages: Page[]
         this._pages = [];
     }
+       
+    ImageModule() {
+        for (const item of NOW) {
+            const ImageChecks = item.그림;
+
+            for (let i = 0; i < ImageChecks.length; i++) {
+                const imageUrl = ImageChecks[i];
+
+                if (imageUrl === null) {
+                    CanvasEvent.removeObject(그림Array[i], imageHideType.Disappear);
+                } 
+                else {
+                    // 이미지가 null이 아닌 경우에 실행할 이벤트 또는 작업
+                    if (i == 0) {
+                        CanvasEvent.addImage(
+                            NOW.그림[0], // 해당 부분 구조에 맞게 수정.  prop --> i
+                            ImageData[NOW.그림[0]],
+                            modelPosition.left,
+                            imageShowType.FadeIn);
+                    }
+                    else if (i == 1) {
+                        CanvasEvent.addImage(
+                            NOW.그림[1],
+                            ImageData[NOW.그림[1]],
+                            modelPosition.center,
+                            imageShowType.FadeIn);
+                    }
+                    else if (i == 2) {
+                        CanvasEvent.addImage(
+                            NOW.그림[2],
+                            ImageData[NOW.그림[2]],
+                            modelPosition.right,
+                            imageShowType.FadeIn);
+                    }
+                    else {
+                        console.log("오류")
+                    }
+                } 
+                    
+            }
+        }
+    }
+
 
     ModuleTest(NOW_Num) {
         const NOW = DATA_01[NOW_Num];
@@ -820,19 +989,24 @@ class Branch {
             SoundEvent.sfx("sounds/효과음/효과음/딸깍.mp3"),
             CanvasEvent.changeBackGround(BackgroundsData[NOW.background]),
             TextBarEvent.text(NOW.teller, NOW.script),
+            // CanvasEvent.addImage(
+            //     NOW.그림[0]
+                
+            // )
+            // this.ImageModule
             CanvasEvent.addImage(
-                NOW.왼그림,
-                ImageData[NOW.왼그림],
+                NOW.그림[0],
+                ImageData[NOW.그림[0]],
                 modelPosition.left,
                 imageShowType.FadeIn),
             CanvasEvent.addImage(
-                NOW.중앙그림,
-                ImageData[NOW.중앙그림],
+                NOW.그림[1],
+                ImageData[NOW.그림[1]],
                 modelPosition.center,
                 imageShowType.FadeIn),
             CanvasEvent.addImage(
-                NOW.우그림,
-                ImageData[NOW.우그림],
+                NOW.그림[2],
+                ImageData[NOW.그림[2]],
                 modelPosition.right,
                 imageShowType.FadeIn),     
         ]);
