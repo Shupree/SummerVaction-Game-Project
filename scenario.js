@@ -31,15 +31,10 @@ const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   // 분기점 1
   .addEventsAsPage([
     CanvasEvent.removeObject("히로인_인간", "images/charactors/히로인_인간_01.png")
   ])
+  
   .ModuleTest(0)
   .ModuleTest(1)
   .ModuleTest(2)
-  // .addEventsAsPage([CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear)])
-  // //이미지 삭제/딜레이 -> 별도 코드, 모듈은 배경/대사/이미지추가만
-  // //.ModuleTest(BackgroundsData[0], NameData.주인공, LogData[1]) //ImageData[0])
-  // //.ModuleTest(BackgroundsData[1], NameData.알수없음, LogData[2]) //ImageData[0])
-  // .Easy_ModuleTest(0, "주인공", 1)
-  // .Easy_ModuleTest(1, "이연우", 2)
 
   .addEventsAsPage([
     CanvasEvent.removeObject("히로인_인간", imageHideType.Disappear),

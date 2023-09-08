@@ -833,7 +833,7 @@ class Branch {
 
     ModuleTest(NOW_Num) {
         const NOW = DATA_01[NOW_Num];
-        if (NOW.background === null) { 
+        if (NOW.Backgrounds_Group === null) { 
             this.addEventsAsPage([
                 DelayEvent.delay(0),
                 SoundEvent.sfx("sounds/효과음/효과음/Mouse Click 2.mp3"),
@@ -859,9 +859,9 @@ class Branch {
         }
         else {
             this.addEventsAsPage([
-                DelayEvent.delay(0),
+                CanvasEvent.changeBackGround(BackgroundsData[NOW.Backgrounds_Group][NOW.Backgrounds]),
                 SoundEvent.sfx("sounds/효과음/효과음/Mouse Click 2.mp3"),
-                CanvasEvent.changeBackGround(BackgroundsData[NOW.background]),
+                DelayEvent.delay(1000),
                 TextBarEvent.text(NOW.teller, NOW.script),
                 CanvasEvent.addImage(
                     NOW.그림[0],
