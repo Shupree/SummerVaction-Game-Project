@@ -80,8 +80,8 @@ const BackgroundsData = {
 };
 
 const ImageData =   {
-    "뉴스앵커" : null, // 코난 범인 마냥 실루엣/음성만?
-    "히로인_인간" : "images/charactors/히로인_인간_01.png",
-    "은주" : "images/charactors/민재_02.png",
+    "투명" : "images/charactors/투명.png",
+    "히로인_인간_01" : "images/charactors/히로인_인간_01.png",
+    "은주" : "images/charactors/은주_02.png",
     
 };
