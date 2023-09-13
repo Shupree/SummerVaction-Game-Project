@@ -1,87 +1,66 @@
 //스크립트 데이터 파일. 배경, 이미지
 //name : String, text : String, src : String
-const BackgroundsData = {
-    // 공통 계단, 정문, 동굴
-    0 : "images/backgrounds/계단/계단A.png", 
-    1 : "images/backgrounds/계단/계단A_블러.png", 
-    2 : "images/backgrounds/계단/계단A_레드.png",
-    3 : "images/backgrounds/계단/계단A_레드블러.png",
-    4 : "images/backgrounds/계단/계단B_블랙.png",
-    5 : "images/backgrounds/계단/계단B_블랙블러.png",
-    6 : "images/backgrounds/계단/계단B_레드블러.png",
-
-    7 : "images/backgrounds/동굴/동굴.png",
-    8 : "images/backgrounds/동굴/동굴_블러.png",
-    
-    //1F 계단, 강당, 보건실, 자료실/창고, 행정실,
-    9 : "images/backgrounds/강당/강당.png",
-    10 : "images/backgrounds/강당/강당_블러.png",
-
-    11 : "images/backgrounds/과학실/과학실.png",
-    12 : "images/backgrounds/과학실/과학실_블러.png",
-    13 : "images/backgrounds/과학실/과학실_레드블러.png",
-
-    14 : "images/backgrounds/보건실/보건실.png",
-    15 : "images/backgrounds/보건실/보건실_블루.png",
-    16 : "images/backgrounds/보건실/보건실_레드.png",
-    17 : "images/backgrounds/보건실/보건실_레드블러.png",
-
-    18 : "images/backgrounds/자료실/자료실_레드.png",
-    19 : "images/backgrounds/자료실/자료실_레드블러.png",
-
-    20 : "images/backgrounds/행정실/행정실.png",
-    21 : "images/backgrounds/행정실/행정실_블러.png",
-    22 : "images/backgrounds/행정실/행정실_레드.png",
-    23 : "images/backgrounds/행정실/행정실_레드블러.png",
-
-    24 : "images/backgrounds/정문/정문_블랙블러.png",
-    25 : "images/backgrounds/정문/정문_레드.png",
-    26 : "images/backgrounds/정문/정문_레드블러.png",
-    
-    //2F 북카페, 컴퓨터실, 급식실
-    27 : "images/backgrounds/북카페/북카페.png",
-    28 : "images/backgrounds/북카페/북카페_블러.png",
-    29 : "images/backgrounds/북카페/북카페_레드.png",
-    30 : "images/backgrounds/북카페/북카페_레드블러.png",
-
-    31 : "images/backgrounds/컴퓨터실/컴퓨터실_블루.png",
-
-    32 : "images/backgrounds/급식실/급식실_블러.png",
-    33 : "images/backgrounds/급식실/급식실_레드블러.png",
-
-    34 : "images/backgrounds/부엌/부엌.png",
-    35 : "images/backgrounds/부엌/부엌레드.png",
-    36 : "images/backgrounds/부엌/부엌_레드블러.png",
-    
-    //3F 화장실, 도서실, 과학실, 창있는 복도,
-    37 : "images/backgrounds/화장실/화장실A.png",
-    38 : "images/backgrounds/화장실/화장실A_레드.png",
-    39 : "images/backgrounds/화장실/화장실A_레드블러.png",
-
-    40 : "images/backgrounds/화장실/화장실B_레드.png",
-    41 : "images/backgrounds/화장실/화장실B_레드블러.png",
-
-    42 : "images/backgrounds/화장실/화장실C_블랙.png",
-    43 : "images/backgrounds/화장실/화장실C_블랙블러.png",
-    44 : "images/backgrounds/화장실/화장실C_레드.png",
-    45 : "images/backgrounds/화장실/화장실C_레드블러.png",
-
-    46 : "images/backgrounds/도서관/도서관.png",
-    47 : "images/backgrounds/도서관/도서관_블러.png",
-    48 : "images/backgrounds/도서관/도서관_레드.png",
-    49 : "images/backgrounds/도서관/도서관_레드블러.png",
-
-    50 : "images/backgrounds/과학실/과학실.png",
-    51 : "images/backgrounds/과학실/과학실_블러.png",
-    52 : "images/backgrounds/과학실/과학실_레드블러.png",
-
-    53 : "images/backgrounds/복도/복도_레드.png",
-    54 : "images/backgrounds/복도/복도_레드블러.png",
-};
+const BackgroundsData = [ 
+    {// 일상의 영역
+    0 : "images/background/필터/블러/일상/골목길.png",
+    1 : "images/background/필터/블러/일상/뉴스.png",
+    2 : "images/background/필터/블러/일상/등교길.png",
+    3 : "images/background/필터/블러/일상/유성.png",
+    4 : "images/background/필터/블러/일상/폴리스라인.png",
+    5 : "images/background/필터/블러/일상/호텔로비.png",
+    6 : "images/background/필터/블러/일상/호텔룸.png",
+    7 : "",
+    8 : "",
+    },
+    { // 히로인의 영역__공통
+    0 : "images/background/필터/블러/비일상/계단2R.png",
+    1 : "images/background/필터/블러/비일상/계단B.png",
+    2 : "images/background/필터/블러/비일상/계단R.png",
+    3 : "images/background/필터/블러/비일상/꼐블랙 블러.png",
+    4 : "images/background/필터/블러/비일상/동굴.png",
+    5 : "images/background/필터/블러/비일상/문2R.png",
+    6 : "images/background/필터/블러/비일상/문R.png",   
+    7 : "images/background/필터/블러/비일상/3F/복도R.png",
+    8 : "",
+    },
+    { // 히로인의 영역__1F, 강당, 보건실, 자료실/창고, 행정실,
+    0 : "images/background/필터/블러/비일상/1F/강당R.png",
+    1 : "images/background/필터/블러/비일상/1F/보건실R.png",
+    2 : "images/background/필터/블러/비일상/1F/자료실2R.png",
+    3 : "images/background/필터/블러/비일상/1F/자료실R.png",
+    4 : "images/background/필터/블러/비일상/1F/행정B.png",
+    5 : "images/background/필터/블러/비일상/1F/행정R.png",
+    6 : "",
+    7 : "",
+    8 : "",
+    },
+    { // 히로인의 영역__2F 북카페, 컴퓨터실, 급식실
+    0 : "images/background/필터/블러/비일상/2F/급식블러.png",
+    1 : "images/background/필터/블러/비일상/2F/급식R.png",
+    2 : "images/background/필터/블러/비일상/2F/부엌R.png",
+    3 : "images/background/필터/블러/비일상/2F/북카.png",
+    4 : "images/background/필터/블러/비일상/2F/북카R.png",
+    5 : "",
+    6 : "",
+    7 : "",
+    8 : "",
+    },
+    { // 히로인의 영역__3F 화장실, 도서실, 과학실, 창있는 복도,
+    0 : "images/background/필터/블러/비일상/3F/과학2R.png",
+    1 : "images/background/필터/블러/비일상/3F/과학R.png",
+    2 : "images/background/필터/블러/비일상/3F/도서관2블러.png",
+    3 : "images/background/필터/블러/비일상/3F/도서관R.png",
+    4 : "images/background/필터/블러/비일상/3F/화장실1R.png",
+    5 : "images/background/필터/블러/비일상/3F/화장실2B.png",
+    6 : "images/background/필터/블러/비일상/3F/화장실2R.png",
+    7 : "images/background/필터/블러/비일상/3F/화장실3B.png",
+    8 : "images/background/필터/블러/비일상/3F/화장실3R.png",
+    }
+];
 
 const ImageData =   {
-    "뉴스앵커" : null,
-    "히로인_인간" : "images/charactors/히로인_인간_01.png",
-    "은주" : "images/charactors/민재_02.png",
+    "투명" : "images/charactors/투명.png",
+    "히로인_인간_01" : "images/charactors/히로인_인간_01.png",
+    "은주" : "images/charactors/은주_02.png",
     
 };

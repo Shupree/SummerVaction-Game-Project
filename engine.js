@@ -386,14 +386,37 @@ class CanvasEvent extends BaseEvent {
         this._canvasEventType = canvasEventType;
         this._eventData = eventData;
     }
-
+    
+    //기존 이미지 삽입 코드
     //return: CanvasEvent
     static addImage(name, src, position, transition) { 
         return new CanvasEvent(
             CanvasEventType.AddImage, 
             new ImagePair(name, src, position, transition)
         );
+        
     }
+    // Null = 이미지 삭제, but 이미지 깨진 화면이 나와 무쓸모
+    // static addImage(name, src, position, transition) { 
+    //     let eventType;
+    
+    //     if (ImagePair.name === null) {
+    //         eventType = CanvasEventType.RemoveObject;
+    //         return new CanvasEvent(
+    //             eventType,
+    //             CanvasEventType.RemoveObject(imageHideType.Disappear)
+    //         );
+    //     } 
+    //     else {
+    //         eventType = CanvasEventType.AddImage;
+    //         return new CanvasEvent(
+    //             eventType, 
+    //             new ImagePair(name, src, position, transition)
+    //         );
+    //     };
+    //     return;
+        
+    // }
 
     //return: CanvasEvent
     static changeBackGround(src) { 
@@ -798,10 +821,6 @@ class BranchManager {
     }
 }
 
-// const parsedData = JSON.parse(DATA_01)
-// class Module_Image {
-//     if(parsedData === null) {};
-// };
 class Branch {
     //branchName: String, end: String, option: String
     constructor(branchName, end, option) {
@@ -814,36 +833,54 @@ class Branch {
 
     ModuleTest(NOW_Num) {
         const NOW = DATA_01[NOW_Num];
-        //환경변화 x, 일러스트 X 일 경우 이벤트 취소하도록 별도 기능 필요
-        this.addEventsAsPage([
-            DelayEvent.delay(100),
-            SoundEvent.sfx("sounds/효과음/효과음/딸깍.mp3"),
-            CanvasEvent.changeBackGround(BackgroundsData[NOW.background]),
-            TextBarEvent.text(NOW.teller, NOW.script),
-            CanvasEvent.addImage(
-                NOW.왼그림,
-                ImageData[NOW.왼그림],
-                modelPosition.left,
-                imageShowType.FadeIn),
-            CanvasEvent.addImage(
-                NOW.중앙그림,
-                ImageData[NOW.중앙그림],
-                modelPosition.center,
-                imageShowType.FadeIn),
-            CanvasEvent.addImage(
-                NOW.우그림,
-                ImageData[NOW.우그림],
-                modelPosition.right,
-                imageShowType.FadeIn),     
-        ]);
-        return this;
-    }
-
-    Easy_ModuleTest(BackgroundsData_Num, NameData_Num, LogData_Num) {
-        this.ModuleTest(
-            BackgroundsData[BackgroundsData_Num], 
-            ImageData[LogData_Num]);
-        return this;
+        if (NOW.Backgrounds_Group === null) { 
+            this.addEventsAsPage([
+                DelayEvent.delay(0),
+                SoundEvent.sfx("sounds/효과음/효과음/Mouse Click 2.mp3"),
+                //CanvasEvent.changeBackGround(BackgroundsData[NOW.background]),
+                TextBarEvent.text(NOW.teller, NOW.script),
+                CanvasEvent.addImage(
+                    NOW.그림[0],
+                    ImageData[NOW.그림[0]],
+                    modelPosition.left,
+                    imageShowType.FadeIn),
+                CanvasEvent.addImage(
+                    NOW.그림[1],
+                    ImageData[NOW.그림[1]],
+                    modelPosition.center,
+                    imageShowType.FadeIn),
+                CanvasEvent.addImage(
+                    NOW.그림[2],
+                    ImageData[NOW.그림[2]],
+                    modelPosition.right,
+                    imageShowType.FadeIn),     
+            ]);
+            return this;
+        }
+        else {
+            this.addEventsAsPage([
+                CanvasEvent.changeBackGround(BackgroundsData[NOW.Backgrounds_Group][NOW.Backgrounds]),
+                SoundEvent.sfx("sounds/효과음/효과음/Mouse Click 2.mp3"),
+                DelayEvent.delay(1000),
+                TextBarEvent.text(NOW.teller, NOW.script),
+                CanvasEvent.addImage(
+                    NOW.그림[0],
+                    ImageData[NOW.그림[0]],
+                    modelPosition.left,
+                    imageShowType.FadeIn),
+                CanvasEvent.addImage(
+                    NOW.그림[1],
+                    ImageData[NOW.그림[1]],
+                    modelPosition.center,
+                    imageShowType.FadeIn),
+                CanvasEvent.addImage(
+                    NOW.그림[2],
+                    ImageData[NOW.그림[2]],
+                    modelPosition.right,
+                    imageShowType.FadeIn),     
+            ]);
+            return this;  
+        }
     }
 
     //page: Page, return: Branch
