@@ -456,28 +456,7 @@ class CanvasEvent extends BaseEvent {
         );
         
     }
-    // Null = 이미지 삭제, but 이미지 깨진 화면이 나와 무쓸모
-    // static addImage(name, src, position, transition) { 
-    //     let eventType;
     
-    //     if (ImagePair.name === null) {
-    //         eventType = CanvasEventType.RemoveObject;
-    //         return new CanvasEvent(
-    //             eventType,
-    //             CanvasEventType.RemoveObject(imageHideType.Disappear)
-    //         );
-    //     } 
-    //     else {
-    //         eventType = CanvasEventType.AddImage;
-    //         return new CanvasEvent(
-    //             eventType, 
-    //             new ImagePair(name, src, position, transition)
-    //         );
-    //     };
-    //     return;
-        
-    // }
-
     //return: CanvasEvent
     static changeBackGround(src) { 
         return new CanvasEvent(
