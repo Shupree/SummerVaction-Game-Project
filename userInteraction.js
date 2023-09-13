@@ -1,17 +1,16 @@
 //유저와 게임 간 상호작용     
-const inventoryBtn = document.getElementById("inventoryImg");
+const item01Btn = document.getElementById("item01ImgDiv");
 var isInventoryOpened = false;
 
 var keys = [];
-var clicks = [];
 
 document.addEventListener("keydown", checkKeyDown, false)
 document.addEventListener("keyup", checkKeyUp, false)
 
 function checkPressed(Btn) {
     event.stopPropagation();
-    if (Btn.id == "inventoryImgDiv") {
-        useInventory();
+    if (Btn.id == "item01Btn") {
+        OpenPopup(1);
     }
     else {
         skipPage();
@@ -45,13 +44,14 @@ function skipPage() {
     }
 }
 
-function useInventory() {
-    if (isInventoryOpened == false) {
-        inventoryBtn.src = "images/UI/Bag(Open).png";
-        isInventoryOpened = true;
+// itemNum: int
+function openPopup(itemNum) {
+    switch(itemNum) {
+        case 1:
+            var url = "itemPopup.html"
+            var name = "아이템" + itemNum
+            var option = "width = 720, height = 480, location = no"
+            window.open(url, name, option);
     }
-    else {
-        inventoryBtn.src = "images/UI/Bag.png";
-        isInventoryOpened = false;
-    }
+    
 }

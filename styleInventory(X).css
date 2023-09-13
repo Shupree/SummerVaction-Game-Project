@@ -1,0 +1,125 @@
+/*인게임 배치 구조*/
+body{
+    overflow-x:hidden;
+    overflow-y:hidden;
+    margin: 0;
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -user-drag: none;
+}
+
+#canvasDiv{
+    z-index: 1;
+    width: 720px;
+    height: 480px;
+    position: relative;
+    background-color: gray;
+    overflow: hidden;
+}
+
+/*이미지 위치 조정*/
+#itemImg01_Div{
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    top: 32px;
+    right: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+#itemImg02_Div{
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    top: 124px;
+    right: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+#itemImg03_Div{
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    top: 216px;
+    right: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+#itemImg04_Div{
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    top: 308px;
+    right: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+#itemDetailImgDiv{
+    z-index: 2;
+    width: 480px;
+    height: 334px;
+    top: 32px;
+    left: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+#backgroundImg{
+    width: 640px;
+    height: 400px;
+}
+
+/*이미지 크기 조정*/
+#itemDetailImg{
+    height: 334px;
+}
+
+#inventoryImgDiv{
+    z-index: 3;
+    width: 50px;
+    top: 25px;
+    right: 25px;
+    position: absolute;
+    text-align: center;
+}
+
+#inventoryImg{
+    width: 50px
+}
+
+#chatBox{
+    width: 1280px;
+    height: 176px;
+    top: 544px;
+    left: 0px;
+
+    position: absolute;
+    z-index: 3;
+    background-color: gray;
+    color: #fff;
+    font-size: 24px;
+    padding-top: 36px;
+    padding-left: 80px;
+    text-shadow: 2px 2px 2px black;
+    /*border-radius: 2em;
+    border-color: rgb(255, 224, 233);
+    border-style: solid;*/
+    /*margin: 10.8px;*/
+}

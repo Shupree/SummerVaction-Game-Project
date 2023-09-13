@@ -2,6 +2,8 @@ const textGame = new TextGame();
 
 const branch_1 = new Branch("branch_1", null, null)
   .addEventsAsPage([
+    OptionEvent.AddOption("A2"),
+    OptionEvent.addItem("Map", "images/items/Map.png"),
     CanvasEvent.changeBackGround("images/backgrounds/도서관/도서관.png"),
     DelayEvent.delay(2500),
     CanvasEvent.addImage(
@@ -26,7 +28,7 @@ const branch_1 = new Branch("branch_1", null, null)
 
 textGame.addBranch(branch_1);
 
-const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   // 분기점 1
+const branch_1_1 = new Branch("branch_1_1", "branch_2", null)   // 분기점 1
   // Test_Module
   
   .ModuleTest(0)
@@ -60,7 +62,7 @@ const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   // 분기점 1
 
 textGame.addBranch(branch_1_1);
 
-const branch_1_2 = new Branch("branch_1_2", "branch_2", "A2")   // 분기점 2
+const branch_1_2 = new Branch("branch_1_2", "branch_2", null)   // 분기점 2
   .addEventsAsPage([CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드.png")])
   .addTextPage("주인공", "나는 (히로인)이/가 좋아!")
   .addEventsAsPage([
@@ -101,3 +103,6 @@ const branch_2_2 = new Branch("branch_2_2", "branch_3", null)
   ])
 
 textGame.addBranch(branch_2_2);
+
+console.log(textGame._optionController._options)
+console.log(textGame._itemController._items)

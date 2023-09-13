@@ -63,17 +63,62 @@ body{
     width: 370px;
 }
 
-#inventoryImgDiv{
+.inventoryImgDiv{
     z-index: 3;
     width: 50px;
     top: 25px;
     right: 25px;
     position: absolute;
     text-align: center;
+    cursor: pointer;
+}
+
+.inventory {
+    z-index: 3;
+    display: inline-block;
+}
+
+.members {
+    z-index: 3;
+    width: 50px;
+    height: 200px;
+    top: 75px;
+    right: 25px;
+    position: absolute;
+    text-align: center;
+    background-color:burlywood;
+    display: none;
+}
+
+#item01ImgDiv{
+    z-index: 4;
+    width: 40px;
+    top: 80px;
+    right: 30px;
+    position: absolute;
+    text-align: center;
+    background-color:rgb(255, 255, 255);
+    display: none;
+}
+
+.inventory:hover .members {
+    display: block;
+}
+
+.inventory:hover #item01ImgDiv {
+    display: block;
+}
+
+.inventory:hover .inventoryImgDiv{
+    
 }
 
 #inventoryImg{
     width: 50px
+}
+
+#item01Img{
+    width: 40px;
 }
 
 #nameBox{
