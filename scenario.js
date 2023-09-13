@@ -101,6 +101,3 @@ const branch_2_2 = new Branch("branch_2_2", "branch_3", null)
   ])
 
 textGame.addBranch(branch_2_2);
-
-console.log(textGame._optionController._options)
-console.log(textGame._itemController._items)

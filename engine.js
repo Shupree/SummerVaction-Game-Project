@@ -6,6 +6,7 @@ class TextGame {
         this._canvasController = new CanvasController();
         this._soundController = new SoundController();
         this._optionController = new OptionController();
+        this._itemController = new ItemController();
         this._branchManager = new BranchManager();
         this._currentBranch = new Branch("Root", "END");
         this._currentPageIndex = 0;
@@ -91,11 +92,6 @@ class TextGame {
             }
         }
 
-        if (this._currentBranch._option != null) {
-            this._optionController.addOption(this._currentBranch._option);
-            this._currentBranch._option = null;
-        }
-
         this._currentPageIndex += 1;   
     }
 
@@ -107,6 +103,10 @@ class TextGame {
             switch (item.eventType) {
                 case EventType.TextBar:
                     this.textBarProcess(item);
+                    break;
+
+                case EventType.Option:
+                    this.optionProcess(item);
                     break;
 
                 case EventType.Canvas:
@@ -143,6 +143,19 @@ class TextGame {
         
             default:
                 break;
+        }
+    }
+
+    optionProcess(optionEvent) {
+        switch (optionEvent.optionEventType) {
+            case OptionEventType.Option:
+                this._optionController.addOption(optionEvent.eventData);
+            
+            case OptionEventType.AddItem:
+                this._itemController.addItem(optionEvent.eventData);
+
+            case OptionEventType.removeItem:
+                this._itemController.removeItem(optionEvent.eventData);
         }
     }
 
@@ -257,7 +270,8 @@ const EventType = {
 	TextBar: 0,
     Canvas: 1,
     Sound: 2,
-    Delay: 3
+    Delay: 3,
+    Option: 4
 }
 
 //TextbarEventType: Number
@@ -265,6 +279,13 @@ const TextbarEventType = {
 	Text: 0,
 	Branch: 1,
     AutoBranch: 2
+}
+
+//OptionEventType: Number
+const OptionEventType = {
+    Option: 0,
+    AddItem: 1,
+    RemoveItem: 2
 }
 
 //CanvasEventType: Number
@@ -377,6 +398,45 @@ class BranchPair {
 
     //return: Option(String)
     get condition() { return this._condition}
+}
+
+class OptionEvent extends BaseEvent {
+    //textBarEventType: TextBarEventType, eventData: any
+    constructor(optionEventType, eventData) {
+        super(EventType.Option);
+        //textBarEventType: TextBarEventType
+        this._optionEventType = optionEventType;
+        //eventData: any
+        this._eventData = eventData;
+    }
+
+    //option: String, item: String, return: OptionEvent
+    static AddOption(option) {
+        return new OptionEvent(
+            OptionEventType.Option,
+            option
+        );
+    }
+
+    static addItem(item) {
+        return new OptionEvent(
+            OptionEventType.AddItem,
+            item
+        );
+    }
+
+    static removeItem(item) {
+        return new OptionEvent(
+            OptionEventType.AddItem,
+            item
+        )
+    }
+
+    //return: TextbarEventType
+    get optionEventType() { return this._optionEventType; }
+
+    //return: any
+    get eventData() { return this._eventData; }
 }
 
 class CanvasEvent extends BaseEvent {
@@ -822,11 +882,10 @@ class BranchManager {
 }
 
 class Branch {
-    //branchName: String, end: String, option: String
+    //branchName: String, end: String
     constructor(branchName, end, option) {
         this._branchName = branchName;
         this._end = end;
-        this._option = option;
         //pages: Page[]
         this._pages = [];
     }
@@ -972,5 +1031,33 @@ class OptionController {
             }
         }
         return false;
+    }
+}
+
+class ItemController {
+    constructor() {
+        this._items = [];
+        this._srcList = [];
+    }
+
+    addItem(item, src) {
+        this._items.push(item);
+        this._srcList.push(src);
+    }
+
+    removeItem(item, src) {
+        for (var i = 0; i < this._items.length; i++) {
+            if (this._items[i] == item) {
+                this._items.splice(i, 1);
+                i--;
+            }
+        }
+
+        for (var i = 0; i < this._srcList.length; i++) {
+            if (this._srcList[i] == src) {
+                this._srcList.splice(i, 1);
+                i--;
+            }
+        }
     }
 }
