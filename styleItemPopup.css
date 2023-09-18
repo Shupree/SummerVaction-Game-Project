@@ -1,0 +1,48 @@
+/*인게임 배치 구조*/
+body{
+    overflow-x:hidden;
+    overflow-y:hidden;
+    margin: 0;
+    -ms-user-select: none; 
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    -user-drag: none;
+}
+
+#canvasDiv{
+    z-index: 1;
+    width: 720px;
+    height: 480px;
+    position: relative;
+    background-color: gray;
+    overflow: hidden;
+}
+
+/*이미지 위치 조정*/
+#itemImgDiv{
+    z-index: 2;
+    width: 480px;
+    height: 334px;
+    top: 32px;
+    left: 20px;
+    position: absolute;
+    background-color: white;
+    text-align: center;
+}
+
+/*#backgroundImg{
+    width: 720px;
+    height: 480px;
+}*/
+
+/*이미지 크기 조정*/
+#itemImg{
+    width: 480px;
+}

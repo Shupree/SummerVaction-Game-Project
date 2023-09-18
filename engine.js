@@ -31,6 +31,10 @@ class TextGame {
         this._canvasController.init(canvasImg, leftImg, centerImg, rightImg);
     }
 
+    setItemElement(itemImg01, itemImg02, itemImg03, itemImg04) {
+        this._itemController.init(itemImg01, itemImg02, itemImg03, itemImg04);
+    }
+
     //entryBranch: Branch
     start(entryBranch) {
         this._currentBranch = entryBranch;
@@ -149,13 +153,13 @@ class TextGame {
     optionProcess(optionEvent) {
         switch (optionEvent.optionEventType) {
             case OptionEventType.Option:
-                this._optionController.addOption(optionEvent.eventData);
+                this._optionController.addOption(optionEvent._eventData);
             
             case OptionEventType.AddItem:
-                this._itemController.addItem(optionEvent.eventData);
+                this._itemController.addItem(optionEvent._eventData.item, optionEvent._eventData.src);
 
-            case OptionEventType.removeItem:
-                this._itemController.removeItem(optionEvent.eventData);
+            case OptionEventType.RemoveItem:
+                this._itemController.removeItem(optionEvent._eventData);
         }
     }
 
@@ -411,23 +415,23 @@ class OptionEvent extends BaseEvent {
     }
 
     //option: String, item: String, return: OptionEvent
-    static AddOption(option) {
+    static addOption(option) {
         return new OptionEvent(
             OptionEventType.Option,
             option
         );
     }
 
-    static addItem(item) {
+    static addItem(item, src) {
         return new OptionEvent(
             OptionEventType.AddItem,
-            item
+            new ItemPair(item, src)
         );
     }
 
     static removeItem(item) {
         return new OptionEvent(
-            OptionEventType.AddItem,
+            OptionEventType.RemoveItem,
             item
         )
     }
@@ -437,6 +441,17 @@ class OptionEvent extends BaseEvent {
 
     //return: any
     get eventData() { return this._eventData; }
+}
+
+class ItemPair {
+    //item: String, src: String
+    constructor(item, src) {
+        this._item = item;
+        this._src = src;
+    }
+
+    get item() { return this._item; }
+    get src() { return this._src; }
 }
 
 class CanvasEvent extends BaseEvent {
@@ -1001,6 +1016,7 @@ class OptionController {
 
     addOption(option) {
         this._options.push(option);
+        console.log(this._options);
     }
 
     checkingOption(option) {
@@ -1016,27 +1032,58 @@ class OptionController {
 class ItemController {
     constructor() {
         this._items = [];
-        this._srcList = [];
+        //this._srcList = [];
+        this._itemImgList = []
+    }
+
+    //itemImg01: HTMLElement, itemImg02: HTMLElement, itemImg03: HTMLElement, itemImg04: HTMLElement
+    init(itemImg01, itemImg02, itemImg03, itemImg04) {
+        this._items = [null, null, null, null];
+        this._itemImgList[0] = itemImg01;
+        this._itemImgList[1] = itemImg02;
+        this._itemImgList[2] = itemImg03;
+        this._itemImgList[3] = itemImg04;
     }
 
     addItem(item, src) {
-        this._items.push(item);
-        this._srcList.push(src);
+        //this._srcList.push(src);
+        
+        for (var i = 0; i < this._itemImgList.length; i++) {
+            if (this._items[i] == null) {
+                this._itemImgList[i].src = src;
+                this._items[i] = item;
+                console.log(this._items[i]);
+                console.log(this._items);
+                console.log(this._itemImgList[i].src);
+                break;
+            }
+
+            if (i == 3) {
+                console.log("ERROR: 아이템 리스트 초과")
+                break;
+            }
+        }
     }
 
-    removeItem(item, src) {
+    removeItem(item) {
         for (var i = 0; i < this._items.length; i++) {
             if (this._items[i] == item) {
                 this._items.splice(i, 1);
-                i--;
+
+                this._itemImgList[i].src == "images/items/None.png";
+                for (i; i < this._itemImgList.length - 1; i++) {
+                    this._itemImgList[i].src = this._itemImgList[i+1].src;
+                    this._itemImgList[i+1].src = "images/items/None.png";
+                }
+                break;
             }
         }
 
-        for (var i = 0; i < this._srcList.length; i++) {
+        /*for (var i = 0; i < this._srcList.length; i++) {
             if (this._srcList[i] == src) {
                 this._srcList.splice(i, 1);
                 i--;
             }
-        }
+        }*/
     }
 }
