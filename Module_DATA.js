@@ -5,6 +5,36 @@
 // Backgrounds : 0, 
 // 을 입력해주세요.
 const DATA_01 = [
+    //이미지 CG test
+    // {   //3, 0
+    //     Backgrounds_Group : 0,
+    //     Backgrounds : 3,
+    //     그림 : ["투명", "민재_조정", "투명"],
+    //     teller : "???",
+    //     script : "이미지 CG test",
+    // },
+    // {   //3, 0
+    //     Backgrounds_Group : 0,
+    //     Backgrounds : 3,
+    //     그림 : ["투명", "연우_조정", "투명"],
+    //     teller : "???",
+    //     script : "안녕 현수야~ 좋은 아침",
+    // },
+    // {   //3, 0
+    //     Backgrounds_Group : 0,
+    //     Backgrounds : 3,
+    //     그림 : ["투명", "윤호_조정", "투명"],
+    //     teller : "???",
+    //     script : "이미지 CG test",
+    // },
+    // {   //3, 0
+    //     Backgrounds_Group : 0,
+    //     Backgrounds : 3,
+    //     그림 : ["투명", "은주_조정", "투명"],
+    //     teller : "???",
+    //     script : "이미지 CG test",
+    // },
+
     {   //3, 0
         Backgrounds_Group : 0,
         Backgrounds : 3,
@@ -358,8 +388,240 @@ const DATA_01 = [
     {  //78, 50
         Backgrounds_Group : null,
         Backgrounds : 0,
-        그림 : ["투명", "민재", "은주"],//정민재/허은주
+        그림 : ["투명", "민재", "투명"],
         teller : "정민재",
         script : "여어~ 허언!"
     },
+    {  //80, 51
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "민재", "은주"],//정민재/허은주
+        teller : "???",
+        script : "너 ㅆ.. 내가 그렇게 부르지 말랬지?"
+    },
+    {  //82, 52
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "민재", "은주"],//정민재/허은주
+        teller : "정민재",
+        script : "응 어쩔~"
+    },
+    {  //82, 53
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "민재", "은주"],//정민재/허은주
+        teller : "???",
+        script : "하아.. 내가 니 때문에 담배를 못 끊는다."
+    },
+    {  //82, 54
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "은주", "투명"],//허은주
+        teller : null,
+        script : "정민재와 티격태격하는 얘는 허은주다."
+    },
+    {  //82, 55
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "은주", "투명"],//허은주
+        teller : null,
+        script : "SNS를 즐겨 하고, 항상 화장을 진하게 하고 다닌다."
+    },
+    {  //82, 56
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "은주", "투명"],//허은주
+        teller : null,
+        script : "나한테 심부름을 자주 시켜 귀찮게 군다. 물론 귀찮은 티를 낼 순 없다."
+    },
+    {  //82, 57
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "정민재",
+        script : "야 근데 걔네들은 언제 와?"
+    },
+    {  //82, 58
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "허은주",
+        script : "윤호 오늘 당번이라 좀 늦고, 걔는 윤호 따라 오겠지"
+    },
+    {  //82, 59
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "정민재",
+        script : "어쩐지 니가 대놓고 담배를 피드라 ㅋ"
+    },
+    {  //82, 60
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "허은주",
+        script : "..닥쳐"
+    },
+    {  //82, 61
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "정민재",
+        script : "아니 걔네 사귀는 거 알면서 왜 포기를 안하는 거야?"
+    },
+    {  //82, 62
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "은주", "투명"],//정민재/허은주
+        teller : "허은주",
+        script : "니가 뭘 알..어머"
+    },
+    {  //82, 63
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],//X
+        teller : null,
+        script : "그 순간, 두 명이 이쪽으로 걸어왔고, 허은주는 황급히 담배를 껐다."
+    },
+    {  //82, 64
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "연우", "투명"],//연우
+        teller : null,
+        script : "한 명은 연우였고, 다른 한 명은.."
+    },
+    {  //82, 65
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],//X
+        teller : "허은주",
+        script : "윤호야~~^^"
+    },
+    {  //82, 66
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "강윤호."
+    },
+    {  //82, 67
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "공부도 잘하고 운동도 잘하고 돈도 많은, 사실상 왕과 같은 존재다."
+    },
+    {  //82, 68
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "나를 직접 괴롭히진 않지만 정민재가 윤호를 믿고 나를 괴롭히는 것도 있고, 사실 그냥 두렵다."
+    },
+    {  //82, 69
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "마치 우두머리 숫사자를 보고 있는 것 같달까.."
+    },
+    {  //82, 70
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "이런 완벽한 사람과 연우가 사귀는 건 당연한 결과일 것이다."
+    },
+    {  //82, 71
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "나였어도 윤호를 선택했을 것이 뻔해서 억울하진 않지만 마음이 아프다."
+    },
+    {  //82, 72
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : null,
+        script : "이런 불공평한 세상"
+    },
+    {  //82, 73
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "윤호", "투명"],//강윤호
+        teller : "강윤호",
+        script : "어, 가자"
+    },
+    {  //82, 74
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],
+        teller : null,
+        script : "윤호는 아주 간결하게 한 마디 하고는, 앞장서서 어디론가로 갔다."
+    },
+    {  //82, 75
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],
+        teller : null,
+        script : "뭐, 어디론가라고 해봤자 늘 똑같은 곳이지만."
+    },
+    {  //82, 76
+        Backgrounds_Group : 0,//호텔. 배경교체
+        Backgrounds : 5,
+        그림 : ["투명", "투명", "투명"],
+        teller : null,
+        script : "도착한 곳은 어느 호텔이다."
+    },
+    {  //82, 77
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],
+        teller : null,
+        script : "평소처럼 윤호는 직원에게 몇 마디 말을 하고, 직원은 방을 안내해준다."
+    },
+    {  //82, 78
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "투명", "투명"],
+        teller : null,
+        script : "정말.. 아무리 작은 호텔이라고 해도 고2가 소유주인게 말이 되나?"
+    },
+    {  //82, 79
+        Backgrounds_Group : 0,//호텔방 교체
+        Backgrounds : 6,
+        그림 : ["투명", "민재", "투명"], //민재
+        teller : "정민재",
+        script : "이야~ 아늑하기도 하지"
+    },
+    {  //82, 80
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "민재", "투명"], //민재
+        teller : "정민재",
+        script : "방음 잘 돼, 눈치 볼 필요 없어, 술 마셔도 되는 거 뿐 아니라 아예 냉장고에 술이 있다?"
+    },
+    {  //82, 81
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["투명", "민재", "투명"], //민재
+        teller : "정민재",
+        script : "올때마다 드는 생각인데 진짜 개꿀이다 ㅋㅋ"
+    },
+    {  //82, 82
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["은주", "연우", "히로인_인간_test"],
+        teller : null,
+        script : "강윤호."
+    },
+    {  //82, 83
+        Backgrounds_Group : null,
+        Backgrounds : 0,
+        그림 : ["민재", "윤호", "투명"],
+        teller : null,
+        script : "강윤호."
+    },
+
 ];

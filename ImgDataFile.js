@@ -67,10 +67,10 @@ const ImageData =   {
     //인물 스탠딩, 자료 스탠딩 파일
     "투명" : "images/charactors/투명.png",
     "히로인_인간_01" : "images/charactors/히로인_인간_01.png",
-    
-    "민재" : "images/charactors/민재_02.png",
-    "연우" : "images/charactors/연우_02.png",
-    "윤호" : "images/charactors/윤호_02.png",
-    "은주" : "images/charactors/은주_02.png",
+    "히로인_인간_test" : "images/charactors/히로인_test.png",
+    "민재" : "images/charactors/민재_테스트.png",
+    "연우" : "images/charactors/연우_test.png",
+    "윤호" : "images/charactors/윤호_테스트.png",
+    "은주" : "images/charactors/은주_test.png",
     "히로인_인간_02" : "images/charactors/히로인_인간_02.png",
 };
