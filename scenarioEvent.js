@@ -3,10 +3,11 @@
 
 const textGame = new TextGame();
 
-const branch_1 = new Branch("시작 브랜치 이름", "다음 브랜치 이름", "생성할 조건 변수 이름")   // 시나리오 불러오기(str, str, str)
-                //다음 브랜치가 분기점에 의해 나눠지는 경우, 다음 브랜치 이름을 'null'로 표기
-                //해당 브랜치가 조건 변수를 생성하지 않는 경우, 조건 변수 이름을 'null'로 표기
+const branch_1 = new Branch("시작 브랜치 이름", "다음 브랜치 이름")   //시나리오 불러오기(str, str)
   .addEventsAsPage([
+    OptionEvent.addOption("생성할 조건 이름"),    //조건 생성(str)
+    OptionEvent.addItem("아이템 이름(Map, MasterKey, USB, Knife, Acid)", "이미지 url"),   //아이템 생성(str, url) 아이템 생성 시 이름 철자 주의
+    OptionEvent.removeItem("아이템 이름"),    //아이템 제거(str) 아이템 생성 시 이름 철자 주의
     CanvasEvent.changeBackGround("이미지 url"),   //배경 이미지 변경(url)
     DelayEvent.delay(0),    //딜레이(int)
     SoundEvent.sfx("사운드 url"),   //효과음 사운드(url)
@@ -25,12 +26,12 @@ const branch_1 = new Branch("시작 브랜치 이름", "다음 브랜치 이름"
     ),
     CanvasEvent.removeObject("이미지 이름", imageHideType.Disappear),   //이미지 제거
     TextBarEvent.branch([   // 분기점 생성
-      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 변수 이름"),   //분기점 생성(str, str, str)
-      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 변수 이름")
-      //조건 변수에 의해 자동으로 진행되는 것을 원할 경우, 분기점 대사를 'null'로 표기
+      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 이름"),   //분기점 생성(str, str, str)
+      new BranchPair("분기점 대사", "브랜치 이름", "필요한 조건 이름")
+      //조건이 의해 자동으로 진행되는 것을 원할 경우, 분기점 대사를 'null'로 표기
       //Ex) new BranchPair(null, "Branch_2_1", "A1")
       
-      //조건 변수가 필요없는 경우, 조건 변수 이름을 'null'로 표기
+      //조건이 필요없는 경우, 조건 변수 이름을 'null'로 표기
       //Ex) new BranchPair("나이프로 찌른다.", "Branch_2_1", null)
     ])
   ])
@@ -42,7 +43,7 @@ const branch_1 = new Branch("시작 브랜치 이름", "다음 브랜치 이름"
 
 textGame.addBranch(branch_1);   //실행
 
-const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   //분기점 1
+const branch_1_1 = new Branch("branch_1_1", "branch_2")   //분기점 1
   .addEventsAsPage([
     TextBarEvent.text(
       "캐릭터 이름",  //캐릭터 이름
@@ -55,7 +56,7 @@ const branch_1_1 = new Branch("branch_1_1", "branch_2", "A1")   //분기점 1
 
 textGame.addBranch(branch_1_1);
 
-const branch_1_2 = new Branch("branch_1_2", "branch_2", "A2")   //분기점 2
+const branch_1_2 = new Branch("branch_1_2", "branch_2")   //분기점 2
   .addEventsAsPage([
     TextBarEvent.text(
       "캐릭터 이름",  //캐릭터 이름
