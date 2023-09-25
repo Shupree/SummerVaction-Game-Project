@@ -19,6 +19,22 @@ const branch_1 = new Branch("branch_1", null)
     ),
   ])
   .addTextPage("히로인","대사 출력 테스트입니다!")
+  .addTextPage("히로인","A")
+  .addTextPage("히로인","B")
+  .addTextPage("히로인","C")
+  .addTextPage("히로인","D")
+  .addTextPage("히로인","E")
+  .addTextPage("히로인","F")
+  .addTextPage("히로인","G")
+  .addTextPage("히로인","H")
+  .addTextPage("히로인","I")
+  .addTextPage("히로인","J")
+  .addTextPage("히로인","K")
+  .addTextPage("히로인","L")
+  .addTextPage("히로인","M")
+  .addTextPage("히로인","N")
+  .addTextPage("히로인","O")
+  .addTextPage("히로인","P")
   .addEventsAsPage([
     TextBarEvent.branch([
       new BranchPair("선택지 1", "branch_1_1", null),

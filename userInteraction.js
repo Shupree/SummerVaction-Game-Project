@@ -1,13 +1,19 @@
 //유저와 게임 간 상호작용     
-//const item01Btn = document.getElementById("item01ImgDiv");
+const logDiv = document.getElementById("logDiv");
+const logTextBox = document.getElementById("logTextBox");
 //var isInventoryOpened = false;
 
 var keys = [];
+var pauseFunction = false;
 
 document.addEventListener("keydown", checkKeyDown, false)
 document.addEventListener("keyup", checkKeyUp, false)
 
 function checkPressed(Btn) {
+    if (pauseFunction == true) {
+        console.log("Paused!")
+        return;
+    }
     event.stopPropagation();
     if (Btn.id == "item01ImgDiv") {
         openPopup(textGame._itemController._items[0]);
@@ -30,17 +36,22 @@ function checkKeyDown(e) {
     keys[e.keyCode] = true;
 
     if (keys[32]) {
-        skipPage();
+        if (pauseFunction != true) {
+            skipPage();
+        }
+    }
+
+    if (keys[76]) {
+        if (pauseFunction != true) {
+            openLogSystem();
+        }
+        else {
+            closeLogSystem();
+        }
     }
 }
 
 function checkKeyUp(e) {
-    //if (keys[32]) {
-        //skipPage()
-        //onSkipTimer = false;
-        //t = 0;
-    //}
-
     keys[e.keyCode] = false;
 }
 
@@ -59,41 +70,59 @@ function openPopup(itemType) {
         case ItemType.Map:
             var url = "popupScripts/Map_Popup.html"
             var name = "지도"
-            var option = "width = 720, height = 480, location = no"
+            var option = "width = 770, height = 550, location = no"
             window.open(url, name, option);
             break;
 
         case ItemType.MasterKey:
             var url = "popupScripts/MasterKey_Popup.html"
             var name = "마스터 키"
-            var option = "width = 720, height = 480, location = no"
+            var option = "width = 770, height = 550, location = no"
             window.open(url, name, option);
             break;
             
         case ItemType.USB:
             var url = "popupScripts/USB_Popup.html"
             var name = "USB"
-            var option = "width = 720, heiaght = 480, location = no"
+            var option = "width = 770, height = 550, location = no"
             window.open(url, name, option);
             break;
 
         case ItemType.Knife:
             var url = "popupScripts/knife_Popup.html"
             var name = "나이프"
-            var option = "width = 720, height = 480, location = no"
+            var option = "width = 770, height = 550, location = no"
             window.open(url, name, option);
             break;
 
         case ItemType.Acid:
             var url = "popupScripts/Acid_Popup.html"
             var name = "산성 용액"
-            var option = "width = 720, height = 480, location = no"
+            var option = "width = 770, height = 550, location = no"
             window.open(url, name, option);
             break;
 
         default:
             break;
     }
+}
+
+function openLogSystem() {
+    pauseFunction = true;
+    textGame._isPaused = true;
+
+    logDiv.style.display = 'block';
+    logTextBox.style.display = 'block';
+
+    logTextBox.scrollTop = logTextBox.scrollHeight;
+}
+
+function closeLogSystem() {
+    pauseFunction = false;
+    textGame._isPaused = false;
+
+    logDiv.style.display = 'none';
+    logTextBox.style.display = 'none';
 }
 
 //ItemType: string

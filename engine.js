@@ -7,11 +7,13 @@ class TextGame {
         this._soundController = new SoundController();
         this._optionController = new OptionController();
         this._itemController = new ItemController();
+        this._logManager = new LogManager();
         this._branchManager = new BranchManager();
         this._currentBranch = new Branch("Root", "END");
         this._currentPageIndex = 0;
         this._delaytimer = null;
         this._isBranching = false;
+        this._isPaused = false;
     }
     
     get textBarController() { return this._textBarController; }
@@ -25,6 +27,10 @@ class TextGame {
 
     setTextBarElement(chatBox, nameBox) {
         this._textBarController.init(chatBox, nameBox);
+    }
+
+    setLogElement(logTextBox) {
+        this._logManager.init(logTextBox);
     }
 
     setCanvasElement(canvasImg, leftImg, centerImg, rightImg) {
@@ -136,6 +142,7 @@ class TextGame {
         switch (textBarEvent.textBarEventType) {
             case TextbarEventType.Text:
                 this._textBarController.setText(textBarEvent.eventData.name, textBarEvent.eventData.text);
+                this._logManager.setLog(textBarEvent.eventData.name, textBarEvent.eventData.text);
                 break;
 
             case TextbarEventType.Branch:
@@ -641,14 +648,18 @@ class TextBarController {
         }
         else{
             if(this._textIndex == 0){
-                this._chatBox.innerHTML = textList[this._textIndex];
                 var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
-                this._textIndex += 1;
+                //if (textGame._isPaused == false) {
+                    this._chatBox.innerHTML = textList[this._textIndex];
+                    this._textIndex += 1;
+                //}
             }
             else if(this._textIndex < text.length){
-                this._chatBox.innerHTML += textList[this._textIndex];
                 var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
-                this._textIndex += 1; 
+                //if (textGame._isPaused == false) {
+                    this._chatBox.innerHTML += textList[this._textIndex];
+                    this._textIndex += 1;
+                //}
             }
             else{
                 clearTimeout(tyInt);
@@ -696,7 +707,7 @@ class TextBarController {
                 label[i].appendChild(button[i]);
                 label[i].appendChild(text[i]);
                 label[i].appendChild(document.createElement('br'));
-                text[i].innerHTML = "→" + options[i].name;
+                text[i].innerHTML = "→ " + options[i].name;
 
                 eventlistener(i).then((resolvedData) => {
                     this._callback(resolvedData, o);
@@ -708,6 +719,7 @@ class TextBarController {
                     button[i].addEventListener('click', function(event) {
                         resolve(options[i]);
                         tmpThis.clearTextBar();
+                        textGame._logManager.setLog("", "→ " + options[i].name);
                     }, false);
                 })
             }
@@ -1078,12 +1090,30 @@ class ItemController {
                 break;
             }
         }
+    }
+}
 
-        /*for (var i = 0; i < this._srcList.length; i++) {
-            if (this._srcList[i] == src) {
-                this._srcList.splice(i, 1);
-                i--;
-            }
-        }*/
+class LogManager {
+    constructor() {
+        this._logTextBox = null;
+        this._log = "";
+    }
+
+    init(logTextBox) {
+        this._logTextBox = logTextBox;
+    }
+
+    setLog(name, text) {
+        if (name == "") {
+            this._log = this._log + text + "<br>" + "<br>" + "<br>";
+        }
+        else if (name == null) {
+            this._log = this._log + text + "<br>" + "<br>";
+
+        }
+        else {
+            this._log = this._log + name + " : " + text + "<br>" + "<br>";
+        }
+        this._logTextBox.innerHTML = this._log + "<br>" + "<br>";
     }
 }

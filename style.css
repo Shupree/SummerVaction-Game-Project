@@ -25,6 +25,36 @@ body{
     overflow: hidden;
 }
 
+#logDiv{
+    z-index: 5;
+    width: 1280px;
+    height: 720px;
+    position: absolute;
+    background-color: black;
+    opacity: 0.8;
+    display: none;
+}
+
+#logTextBox{
+    overflow-y: scroll;
+    width: 1280px;
+    height: 720px;
+    top: 0px;
+    left: 0px;
+
+    position: absolute;
+    z-index: 5;
+    color: #fff;
+    font-size: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 60px;
+    padding-right: 60px;
+    text-shadow: 2px 2px 2px black;
+    opacity: 1;
+    display: none;
+}
+
 /*이미지 위치 조정*/
 #leftImgDiv{
     z-index: 2;
