@@ -19,12 +19,13 @@ class TextGame {
     get textBarController() { return this._textBarController; }
     get canvasController() { return this._canvasController; }
 
-    //분기 추가
+    //'branch' 추가
     //branch: Branch
     addBranch(branch) {
         this._branchManager.addBranch(branch);
     }
 
+    //'set-' 함수: 각 클래스의 기초값 구성 ('start.js'에서 호출)
     setTextBarElement(chatBox, nameBox) {
         this._textBarController.init(chatBox, nameBox);
     }
@@ -47,10 +48,13 @@ class TextGame {
         this.nextPage();
     }
 
+    //대사 스킵 호출 함수 ('userInteraction.js에서 호출')
     skipText() {
-            this._textBarController._onSkip = true;
+        //class TextBarController의 함수 호출
+        this._textBarController._onSkip = true;
     }
 
+    //현재 Branch에서 다음 장면 읽기
     nextPage() {
         if (this._currentBranch.pages.length <= this._currentPageIndex)
             return;
@@ -105,28 +109,37 @@ class TextGame {
         this._currentPageIndex += 1;   
     }
 
+    //'scenario.js'에서 사용하는 함수 분류
+    //eventProcess를 통해 작동되는 이벤트는 게임이 진행됨에 따라 실시간으로 실행되는 이벤트입니다.
+    //게임 시작과 동시에 구성하고 싶은 이벤트가 있다면 Branch() 파트를 참고해주세요!
+    
     //baseEvent: BaseEvent[]
     eventProcess(baseEvent){
         //item: BaseEvent 
         for (let index = 0; index < baseEvent.length; index++) {
             const item = baseEvent[index];
             switch (item.eventType) {
+                //TextBarEvent
                 case EventType.TextBar:
                     this.textBarProcess(item);
                     break;
 
+                //OptionEvent
                 case EventType.Option:
                     this.optionProcess(item);
                     break;
 
+                //CanvasEvent
                 case EventType.Canvas:
                     this.canvasProcess(item);
                     break;
 
+                //SoundEvent
                 case EventType.Sound:
                     this.soundProcess(item);
                     break;
 
+                //DelayEvent
                 case EventType.Delay:
                     this.delayProcess(item, baseEvent, index);
                     return;
@@ -137,14 +150,17 @@ class TextGame {
         }
     }
 
+    //TextBarEvent 세부 분류
     //textBarEvent: TextBarEvent
     textBarProcess(textBarEvent) {
         switch (textBarEvent.textBarEventType) {
+            //TextBarEvent.text() 이벤트 처리
             case TextbarEventType.Text:
                 this._textBarController.setText(textBarEvent.eventData.name, textBarEvent.eventData.text);
                 this._logManager.setLog(textBarEvent.eventData.name, textBarEvent.eventData.text);
                 break;
 
+            //TextBarEvent.Branch() 이벤트 처리
             case TextbarEventType.Branch:
                 this._isBranching = true;
                 let selectedData = [];
@@ -157,22 +173,29 @@ class TextGame {
         }
     }
 
+    //OptionEvent 세부 분류
+    //optionEvent: OptionEvent
     optionProcess(optionEvent) {
         switch (optionEvent.optionEventType) {
-            case OptionEventType.Option:
+            //OptionEvent.addOption() 이벤트 처리
+            case OptionEventType.AddOption:
                 this._optionController.addOption(optionEvent._eventData);
             
+            //OptionEvent.addItem() 이벤트 처리
             case OptionEventType.AddItem:
                 this._itemController.addItem(optionEvent._eventData.item, optionEvent._eventData.src);
 
+            //OptionEvent.ramoveItem() 이벤트 처리
             case OptionEventType.RemoveItem:
                 this._itemController.removeItem(optionEvent._eventData);
         }
     }
 
+    //CanvasEvent 세부 분류
     //canvasEvent: CanvasEvent
     canvasProcess(canvasEvent) {
         switch (canvasEvent.canvasEventType) {
+            //CanvasEvent.addImage() 이벤트 처리
             case CanvasEventType.AddImage:
                 this._canvasController.imageShow(
                     canvasEvent._eventData.name, 
@@ -182,24 +205,28 @@ class TextGame {
                 );
                 break;
 
+            //CanvasEvent.changeBackGround() 이벤트 처리
             case CanvasEventType.ChangeBackGround:
                 this._canvasController.setBackground(
                     canvasEvent._eventData.src
                 );
                 break;
 
+            //CanvasEvent.drawText() 이벤트 처리
             case CanvasEventType.DrawText:
                 this._canvasController.drawtext(
                     canvasEvent._eventData.text
                 );
                 break;
             
+            //CanvasEvent.showEnding() 이벤트 처리
             case CanvasEventType.ShowEnding:
                 this._canvasController.endScreen(
-                    canvasEvent._eventData.text
+                    canvasEvent._eventData.src
                 );
                 break;
                 
+            //CanvasEvent.removeObject() 이벤트 처리
             case CanvasEventType.RemoveObject:
                 this._canvasController.imageRemove(
                     canvasEvent._eventData.name, 
@@ -212,9 +239,11 @@ class TextGame {
         }
     }
     
+    //SoundEvent 세부 분류
     //soundEvent: SoundEvent
     soundProcess(soundEvent) {
         switch (soundEvent.soundEventType) {
+            //SoundEvent.background() 이벤트 처리
             case SoundEventType.Background:
                 if (soundEvent.stop === true)
                     this._soundController.stopBackground();
@@ -222,6 +251,7 @@ class TextGame {
                     this._soundController.playBackground(soundEvent.src);
                 break;
                 
+            //SoundEvent.sfx() 이벤트 처리
             case SoundEventType.Sfx:
                 this._soundController.playSound(soundEvent.src)
                 break;
@@ -231,6 +261,7 @@ class TextGame {
         }
     }
     
+    //delayEvent 세부 분류
     //delayEvent: DelayEvent, baseEvents: BaseEvent[], index: Number
     delayProcess(delayEvent, baseEvents, index) {
         this._delaytimer = setTimeout(() => {
@@ -264,6 +295,7 @@ class TextGame {
     //branchPair: BranchPair
     branchProcess(branchPair, o) {
         const jumpBranch = o._branchManager.getBranch(branchPair.branch);
+        //비정상적인 실행이 감지되었을 시 실행됨. (버그감지용이지만 현재 코드를 바꿨기 때문에 실행되지 않을 수 있습니다.)
         if (jumpBranch == null) {
             o._canvasController.endScreen("END (Error)");
             o._isBranching = false;
@@ -276,6 +308,7 @@ class TextGame {
     }
 }
 
+//이벤트 타입들 정리
 //EventType: Number
 const EventType = {
 	TextBar: 0,
@@ -294,7 +327,7 @@ const TextbarEventType = {
 
 //OptionEventType: Number
 const OptionEventType = {
-    Option: 0,
+    AddOption: 0,
     AddItem: 1,
     RemoveItem: 2
 }
@@ -341,6 +374,8 @@ class Page {
     get baseEvents() { return this._baseEvents; }
 }
 
+//BaseEvent: 모든 Event의 기반이 되는 Event (실제 scenario.js에서 사용되는 명령어명을 표기합니다.)
+//TextBarEvent, CanvasEvent 등과 같은 Event를 수정할 때 같이 수정해야하는 파트
 class BaseEvent {
     //eventType: EventType
     constructor(eventType) {
@@ -352,6 +387,7 @@ class BaseEvent {
     get eventType() { return this._eventType; }
 }
 
+//TextBarEvent
 class TextBarEvent extends BaseEvent {
     //textBarEventType: TextBarEventType, eventData: any
     constructor(textBarEventType, eventData) {
@@ -379,6 +415,7 @@ class TextBarEvent extends BaseEvent {
     get eventData() { return this._eventData; }
 }
 
+//TextBarEvent.text()에 사용되는 자료
 class TextPair {
     //name: String, text: String
     constructor(name, text) {
@@ -393,6 +430,7 @@ class TextPair {
     get text() { return this._text; }
 }
 
+//TextBarEvent.Branch()에 사용되는 자료
 class BranchPair {
     //name: String, branch: Branch, condition: Option(String)
     constructor(name, branch, condition) {
@@ -411,6 +449,7 @@ class BranchPair {
     get condition() { return this._condition}
 }
 
+//OptoinEvent (따로 제작한 Event 시스템입니다.)
 class OptionEvent extends BaseEvent {
     //textBarEventType: TextBarEventType, eventData: any
     constructor(optionEventType, eventData) {
@@ -424,7 +463,7 @@ class OptionEvent extends BaseEvent {
     //option: String, item: String, return: OptionEvent
     static addOption(option) {
         return new OptionEvent(
-            OptionEventType.Option,
+            OptionEventType.AddOption,
             option
         );
     }
@@ -450,6 +489,7 @@ class OptionEvent extends BaseEvent {
     get eventData() { return this._eventData; }
 }
 
+//OptionEvent.addItem()에 사용되는 자료
 class ItemPair {
     //item: String, src: String
     constructor(item, src) {
@@ -461,6 +501,7 @@ class ItemPair {
     get src() { return this._src; }
 }
 
+//CanvasEvent
 class CanvasEvent extends BaseEvent {
     //canvasEventType: CanvasEventType
     constructor(canvasEventType, eventData) {
@@ -496,10 +537,10 @@ class CanvasEvent extends BaseEvent {
     }
     
     //return: CanvasEvent
-    static showEnding(text) {
+    static showEnding(src) {
         return new CanvasEvent(
             CanvasEventType.ShowEnding,
-            new DrawTextPair(text)
+            new EndingImagePair(src)
         );
     }
 
@@ -517,6 +558,7 @@ class CanvasEvent extends BaseEvent {
     get eventData() { return this._eventData; }
 }
 
+//OptionEvent.addImage()에 사용되는 자료
 class ImagePair {
     //name: String, src: String, position: modelPosition transition: String
     constructor(name, src, positon, transition) {
@@ -532,6 +574,7 @@ class ImagePair {
     get transition() { return this._transition; }
 }
 
+//OptionEvent.changeBackGround()에 사용되는 자료
 class BackGroundPair {
     //src: String
     constructor(src) {
@@ -541,6 +584,7 @@ class BackGroundPair {
     get src() { return this._src; }
 }
 
+//OptionEvent.drawText()에 사용되는 자료
 class DrawTextPair {
     //text: String
     constructor(text) {
@@ -550,6 +594,17 @@ class DrawTextPair {
     get text() { return this._text; }
 }
 
+//OptionEvent.showEnding()에 사용되는 자료
+class EndingImagePair {
+    //src: String
+    constructor(src) {
+        this._src = src;
+    }
+
+    get src() { return this._src; }
+}
+
+//OptionEvent.removeObject()에 사용되는 자료
 class RemoveObjectPair {
     //name: String
     constructor(name, transition) {
@@ -566,6 +621,7 @@ const SoundEventType = {
     Sfx: 1
 }
 
+//SoundEvent
 class SoundEvent extends BaseEvent {
     //src: String, soundEventType: SoundEventType, stop: bool
     constructor(src, soundEventType, stop) {
@@ -592,6 +648,7 @@ class SoundEvent extends BaseEvent {
     get stop() { return this._stop; }
 }
 
+//DelayEvent
 class DelayEvent extends BaseEvent {
     //delay: Number
     constructor(delay) {
@@ -605,6 +662,9 @@ class DelayEvent extends BaseEvent {
 
     get delay() { return this._delay; }
 }
+
+//-Controller는 위의 -Event들의 실질적인 구동부라고 생각하면 됩니다.
+//따라서 특정 Event를 수정하거나 Event의 구동 부분을 수정할 때 -Controller를 수정해야 합니다.
 
 //텍스트바 컨트롤러
 class TextBarController {
@@ -624,6 +684,7 @@ class TextBarController {
         this._nameBox = nameBox;
     }
 
+    //다음 텍스트 불러오기 및 타이핑 애니메이션 효과 실행
     //name: String, text: String
     setText(name, text) { 
         clearTimeout(tyInt);
@@ -639,6 +700,7 @@ class TextBarController {
 
         let textList = text.split("")
 
+        //빠른 대사 넘기기(스킵) 기능
         if(this._onSkip == true) {
             this._onSkip = false;
             clearTimeout(tyInt);
@@ -646,20 +708,18 @@ class TextBarController {
             this._chatBox.innerHTML = text + "<br>";
             this._textIndex = 0;
         }
+
+        //타이핑 애니메이션 효과
         else{
             if(this._textIndex == 0){
                 var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
-                //if (textGame._isPaused == false) {
-                    this._chatBox.innerHTML = textList[this._textIndex];
-                    this._textIndex += 1;
-                //}
+                this._chatBox.innerHTML = textList[this._textIndex];
+                this._textIndex += 1;
             }
             else if(this._textIndex < text.length){
                 var tyInt = setTimeout(() => textGame._textBarController.setText(name, text), 75);
-                //if (textGame._isPaused == false) {
-                    this._chatBox.innerHTML += textList[this._textIndex];
-                    this._textIndex += 1;
-                //}
+                this._chatBox.innerHTML += textList[this._textIndex];
+                this._textIndex += 1;
             }
             else{
                 clearTimeout(tyInt);
@@ -669,6 +729,7 @@ class TextBarController {
         }
     }
 
+    //Branch()를 통한 선택지 표현 실행
     //options: BranchPair[], o: any, return: String
     showBranch(options, o) { 
         var isAuto = true;
@@ -726,6 +787,7 @@ class TextBarController {
         }
     }
 
+    //텍스트바 클리어
     clearTextBar() {
         while(this._chatBox.hasChildNodes()){
             this._chatBox.removeChild(this._chatBox.firstChild);
@@ -754,6 +816,7 @@ const modelPosition = {
     right: 2
 }
 
+//캔버스컨트롤러
 class CanvasController {
     constructor() {
         this._canvasImg = null;
@@ -775,6 +838,8 @@ class CanvasController {
             img[i].style.opacity = 0;
         }
     }
+
+    //이미지 보여주기
     //name: String, src: String, positon: modelPosition transition: imageShowType
     imageShow(name, src, position, transition) { // 
         let img;
@@ -804,6 +869,7 @@ class CanvasController {
 
     }
     
+    //이미지 삭제
     //name: String, transition: imageHideType
     imageRemove(name, transition) { 
         //name으로 이미지를 지울수 있음
@@ -847,22 +913,38 @@ class CanvasController {
         this._chatBox.innerHTML = text;
     }
 
-    //text: String
-    endScreen(text) {
+    //엔딩 연출
+    //src: String
+    endScreen(src) {
         const canvasDiv = document.getElementById('canvasDiv');
-        while(canvasDiv.firstChild){
-            canvasDiv.removeChild(canvasDiv.firstChild);
+        const textBox = document.getElementById('moveToMainTextBox');
+
+        const canvasChildren = Array.from(canvasDiv.children);
+
+        for (let i = 0; i < canvasChildren.length; i++){
+            if (canvasChildren[i].id == "moveToMainTextBox") {
+                continue;
+            }
+            if (canvasChildren[i].id == "backgroundImg") {
+                continue;
+            }
+            canvasChildren[i].remove();
         }
         
-        canvasDiv.style.backgroundColor = "black";
+        setTimeout(() => {
+            this._canvasImg.src = src;
+            textBox.style.display = "block";
+        }, 1000);
+        //canvasDiv.style.backgroundColor = "black";
         canvasDiv.classList.add("endScreen");
-        canvasDiv.innerHTML = text;
-        canvasDiv.style.color = "white";
-        canvasDiv.style.paddingTop = "27vw";
+        //canvasDiv.innerHTML = text;
+        //canvasDiv.style.color = "white";
+        //canvasDiv.style.paddingTop = "27vw";
 
         setTimeout(() => {
-            location.href = "main.html";
-        }, 5000);
+            textBox.style.display = "block";
+            //location.href = "main.html";
+        }, 3000);
     }
 }
 
@@ -887,6 +969,10 @@ class BranchManager {
     }
 }
 
+//Scenario.js에서 브랜치 구성 요소
+//여기서 구현된 이벤트들은 textGame.EventProcess에서 구동되는 이벤트와 달리
+//게임 시작과 동시에 저장되고 실행되는 정보들입니다.
+//실시간으로 플레이어의 행동에 따라 변화하거나 실행되어야하는 이벤트가 있다면 textGame.EventProcess 파트와 BaseEvent 파트를 참고해주세요!
 class Branch {
     //branchName: String, end: String
     constructor(branchName, end, option) {
@@ -995,6 +1081,7 @@ class Branch {
     get pages() { return this._pages; }
 }
 
+//사운드 컨트롤러
 class SoundController {
     constructor() {
         this._backgroundSound = new Audio();
@@ -1021,16 +1108,19 @@ class SoundController {
     }
 }
 
+//조건 컨트롤러
 class OptionController {
     constructor() {
         this._options = [];
     }
 
+    //조건 변수 생성
     addOption(option) {
         this._options.push(option);
         console.log(this._options);
     }
 
+    //조건 변수 확인
     checkingOption(option) {
         for (var i = 0; i < this._options.length; i++) {
             if (option == this._options[i]) {
@@ -1041,6 +1131,7 @@ class OptionController {
     }
 }
 
+//아이템 컨트롤러
 class ItemController {
     constructor() {
         this._items = [];
@@ -1057,6 +1148,7 @@ class ItemController {
         this._itemImgList[3] = itemImg04;
     }
 
+    //아이템 추가 기능
     addItem(item, src) {
         //this._srcList.push(src);
         
@@ -1064,9 +1156,6 @@ class ItemController {
             if (this._items[i] == null) {
                 this._itemImgList[i].src = src;
                 this._items[i] = item;
-                console.log(this._items[i]);
-                console.log(this._items);
-                console.log(this._itemImgList[i].src);
                 break;
             }
 
@@ -1077,6 +1166,7 @@ class ItemController {
         }
     }
 
+    //아이템 제거 기능
     removeItem(item) {
         for (var i = 0; i < this._items.length; i++) {
             if (this._items[i] == item) {
@@ -1093,6 +1183,7 @@ class ItemController {
     }
 }
 
+//로그 매니저: log시스템의 구성 담당
 class LogManager {
     constructor() {
         this._logTextBox = null;

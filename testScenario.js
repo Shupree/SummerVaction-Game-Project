@@ -20,25 +20,10 @@ const branch_1 = new Branch("branch_1", null)
   ])
   .addTextPage("히로인","대사 출력 테스트입니다!")
   .addTextPage("히로인","A")
-  .addTextPage("히로인","B")
-  .addTextPage("히로인","C")
-  .addTextPage("히로인","D")
-  .addTextPage("히로인","E")
-  .addTextPage("히로인","F")
-  .addTextPage("히로인","G")
-  .addTextPage("히로인","H")
-  .addTextPage("히로인","I")
-  .addTextPage("히로인","J")
-  .addTextPage("히로인","K")
-  .addTextPage("히로인","L")
-  .addTextPage("히로인","M")
-  .addTextPage("히로인","N")
-  .addTextPage("히로인","O")
-  .addTextPage("히로인","P")
   .addEventsAsPage([
     TextBarEvent.branch([
-      new BranchPair("선택지 1", "branch_1_1", null),
-      new BranchPair("선택지 2", "branch_1_2", null)
+      new BranchPair("정문", "branch_1_1", null),
+      new BranchPair("컴퓨터실", "branch_1_2", null)
     ]),
   ])
 
@@ -46,6 +31,7 @@ textGame.addBranch(branch_1);
 
 const branch_1_1 = new Branch("branch_1_1", "branch_2")   // 분기점 2
   .addEventsAsPage([
+    OptionEvent.addOption("Gate"),
     OptionEvent.addItem("Map", "images/items/ItemIcon.png"),
     CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드.png")
   ])
@@ -64,6 +50,7 @@ textGame.addBranch(branch_1_1);
 
 const branch_1_2 = new Branch("branch_1_2", "branch_2")   // 분기점 2
   .addEventsAsPage([
+    OptionEvent.addOption("ComputerRoom"),
     OptionEvent.removeItem("Map"),
     CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드.png")
   ])
@@ -86,8 +73,8 @@ const branch_2 = new Branch("branch_2", null)
     CanvasEvent.changeBackGround("images/backgrounds/자료실/자료실_레드블러.png"),
     TextBarEvent.text("히로인", "이전 선택지에서의 선택에 따른 자동 진행 테스트입니다!"),
     TextBarEvent.branch([
-      new BranchPair(null, "branch_2_1", "A1"),
-      new BranchPair(null, "branch_2_2", "A2")
+      new BranchPair(null, "branch_2_1", "Gate"),
+      new BranchPair(null, "branch_2_2", "ComputerRoom")
     ])
   ])
 
@@ -95,14 +82,17 @@ textGame.addBranch(branch_2);
 
 const branch_2_1 = new Branch("branch_2_1", "branch_3")
   .addEventsAsPage([
-    TextBarEvent.text("히로인", "A1 선택지를 추가했을 경우의 장면입니다."),
+    TextBarEvent.text("히로인", "정문을 갔을 경우의 텍스트입니다."),
   ])
 
 textGame.addBranch(branch_2_1);
 
 const branch_2_2 = new Branch("branch_2_2", "branch_3")
   .addEventsAsPage([
-    TextBarEvent.text("히로인", "A2 선택지를 추가했을 경우의 장면입니다."),
+    TextBarEvent.text("히로인", "컴퓨터실을 갔을 경우의 텍스트입니다."),
+    CanvasEvent.showEnding(
+      "images/items/ItemIcon.png"
+    )
   ])
 
 textGame.addBranch(branch_2_2);

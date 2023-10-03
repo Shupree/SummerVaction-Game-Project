@@ -62,8 +62,8 @@ const branch_1_2 = new Branch("branch_1_2", "branch_2")   //분기점 2
       "캐릭터 이름",  //캐릭터 이름
       "대사"  // 대사(text)
     ),
-    CanvasEvent.showEnding(   //엔딩 (기본으로 제작된 엔딩 구성입니다. 추후 엔딩 연출에 따라 이용되지 않을 수도 있습니다.)
-      "엔딩 멘트"
+    CanvasEvent.showEnding(   //엔딩
+      "src"
     )
   ])
 
