@@ -10,8 +10,8 @@ const BackgroundsData = [
     4 : "images/background/필터/블러/일상/폴리스라인.png",
     5 : "images/background/필터/블러/일상/호텔로비.png",
     6 : "images/background/필터/블러/일상/호텔룸.png",
-    7 : "",
-    8 : "",
+    7 : "images/background/필터/블러/일상/교실.png",
+    8 : "images/background/필터/블러/일상/블랙배경.png",
     },
     { // 히로인의 영역__공통, 
     //Group NUM : 1
